@@ -758,6 +758,95 @@
         document.getElementById('chatToggle').onclick = () => document.getElementById('chatWindow').classList.toggle('hidden');
         document.getElementById('chatClose').onclick = () => document.getElementById('chatWindow').classList.add('hidden');
 
+        function getGaryResponse(msg) {
+            const m = msg.toLowerCase();
+
+            // Greetings
+            if (m.match(/^(hi|hello|hey|sup|yo|what'?s up)/)) {
+                const greetings = [
+                    "Yo! Welcome to SHMOBILE. I'm Gary. I do everything here. EVERYTHING. 😤",
+                    "Hey hey! Gary here. I'm the entire support team. Send help. Or don't. I'm used to it.",
+                    "Hi! You've reached Gary. I'm currently the CEO, janitor, and IT department. What's up?"
+                ];
+                return greetings[Math.floor(Math.random() * greetings.length)];
+            }
+
+            // Price/cost questions
+            if (m.match(/price|cost|how much|expensive|cheap|afford/)) {
+                return "Our phones start at $9.99. Yes, you read that right. That's less than your lunch. The IShmob 17 is literally FREE with a 2yr contract. Your wallet can thank me later. 💰";
+            }
+
+            // Phone/product questions
+            if (m.match(/ishmob|phone|device|model|17|ultra|classic/)) {
+                return "The IShmob 17 is our newest baby. 6.7\" AMOLED, 200MP camera, and it's $0 with a 2yr contract. It's basically a steal. Like, we might actually be losing money. Don't tell my boss. 📱";
+            }
+
+            // Plan questions
+            if (m.match(/plan|data|unlimited|minutes|gb/)) {
+                return "We got 3 plans: Starter ($29.99), Pro ($49.99), and Ultimate ($79.99). The Ultimate comes with a potential Gary home visit. I've never actually done one though. I don't have a car. 🚗";
+            }
+
+            // Shipping/delivery
+            if (m.match(/ship|deliver|order|track|arrive|when/)) {
+                return "Shipping takes 3-5 business days. Or 3-5 business decades. Depends on if the carrier pigeon is feeling motivated. Just kidding... we use FedEx now. The pigeon retired. 🐦";
+            }
+
+            // Support/help
+            if (m.match(/help|support|problem|issue|broken|fix|repair|warranty/)) {
+                return "I'm here to help! Well, I'm here. The 'help' part is debatable. But seriously, what's the issue? I once fixed a phone with a paperclip and a dream. 🔧";
+            }
+
+            // Return/refund
+            if (m.match(/return|refund|money back|exchange/)) {
+                return "We have a 30-day return policy! Just bring it back in the original box. If you lost the box... we'll figure something out. I once accepted a return in a pizza box. No judgement here. 📦";
+            }
+
+            // Podcast
+            if (m.match(/podcast|listen|radio|episode/)) {
+                return "The SHMOB Podcast is fire 🔥 Latest episode: 'Why Gary Deserves a Raise' ft. Gary (that's me). Spoiler: I do deserve a raise. Scroll down to listen!";
+            }
+
+            // Career/job
+            if (m.match(/job|career|hire|work|hiring|apply/)) {
+                return "We're hiring! Current openings: everything. I'm literally one person running this whole operation. Please apply. I haven't had a day off since 2019. 😅";
+            }
+
+            // Thanks
+            if (m.match(/thank|thanks|thx|appreciate/)) {
+                return "You're welcome! You just made my whole day. And trust me, it's been a LONG day. It's always a long day here. But I love it. Mostly. 😊";
+            }
+
+            // Bye
+            if (m.match(/bye|goodbye|see ya|later|cya/)) {
+                return "Peace out! ✌️ Remember: Can you SHMOB me now? Yes. Yes you can. Come back anytime. I'm literally always here.";
+            }
+
+            // Funny/joke
+            if (m.match(/joke|funny|laugh|lol|haha/)) {
+                const jokes = [
+                    "Why did the IShmob go to therapy? Because it had too many hang-ups! 📞😂",
+                    "What's the difference between SHMOBILE and other carriers? We actually answer the phone. Well, Gary does. Sometimes. 😂",
+                    "I told my boss I needed a raise. He said 'you ARE the raise.' I still don't know what that means. 🤔"
+                ];
+                return jokes[Math.floor(Math.random() * jokes.length)];
+            }
+
+            // Who is Gary
+            if (m.match(/gary|who are you|who r u/)) {
+                return "I'm Gary. THE Gary. Entire support department, social media manager, and I also water the office plant. She's called Fernanda. She's doing great btw. 🌿";
+            }
+
+            // Default funny responses
+            const defaults = [
+                "Hmm interesting question. Let me consult the ancient SHMOB scrolls... *flips through papers* ...nope, nothing. But I'm sure I can help anyway! What specifically do you need? 😄",
+                "Great question! I don't have the exact answer but I'm 73% confident I can figure it out. Ask me about phones, plans, or shipping and I'm your guy! 🤓",
+                "I'm gonna be honest, that one stumped me. But hey, try asking about our phones, plans, or deals! That's where I really shine. ✨",
+                "My brain just did a 404. Try asking about IShmob phones, our plans, shipping, or careers! Or just tell me a joke. I could use one. 😅",
+                "Ooh that's a thinker. Gary needs a coffee break for that one ☕ In the meantime, wanna hear about our awesome IShmob 17? It's FREE with a 2yr contract!"
+            ];
+            return defaults[Math.floor(Math.random() * defaults.length)];
+        }
+
         function sendChat() {
             const input = document.getElementById('chatInput');
             const msg = input.value.trim();
@@ -768,10 +857,17 @@
             input.value = '';
             box.scrollTop = box.scrollHeight;
 
+            // Typing indicator
+            box.innerHTML += `<div id="typing" class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%] text-zinc-400 italic">Gary is typing...</div>`;
+            box.scrollTop = box.scrollHeight;
+
             setTimeout(() => {
-                box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">That sounds interesting. I'll pass that to Gary once he finishes his sandwich. Or maybe not. lol</div>`;
+                const typing = document.getElementById('typing');
+                if (typing) typing.remove();
+                const response = getGaryResponse(msg);
+                box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">${response}</div>`;
                 box.scrollTop = box.scrollHeight;
-            }, 1000);
+            }, 1200);
         }
 
         document.getElementById('chatSend').onclick = sendChat;
