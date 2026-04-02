@@ -186,33 +186,6 @@
                 </div>
             </div>
 
-            <!-- Podcast Section -->
-            <div class="py-24 bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex flex-col md:flex-row items-center gap-12">
-                        <div class="w-full md:w-1/2">
-                            <img src="images/podcast.png" alt="SHMO Podcast" class="w-full rounded-3xl shadow-2xl">
-                        </div>
-                        <div class="w-full md:w-1/2">
-                            <h2 class="text-v-red font-black text-sm tracking-[0.3em] uppercase mb-4">Now Streaming</h2>
-                            <h3 class="text-4xl md:text-5xl font-black mb-6 tracking-tight">THE SHMO PODCAST</h3>
-                            <p class="text-xl text-zinc-600 mb-6">Tune in to the official SHMOBILE podcast. Hot takes, cold calls, and everything in between.</p>
-                            <div class="bg-zinc-100 rounded-2xl p-6 flex items-center gap-4">
-                                <img src="images/img-radio.png" alt="Radio" class="w-20 h-20 rounded-xl object-cover">
-                                <div class="flex-1">
-                                    <p class="font-bold text-lg">Latest Episode</p>
-                                    <p class="text-zinc-500 text-sm">Why Gary Deserves a Raise (ft. Gary)</p>
-                                </div>
-                                <button onclick="document.getElementById('podcastAudio').play()" class="bg-v-red text-white w-14 h-14 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                                    <i class="fa-solid fa-play text-lg ml-1"></i>
-                                </button>
-                            </div>
-                            <audio id="podcastAudio" src="images/download.mp3"></audio>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Shop Phones on Home Page -->
             <div class="py-24 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -264,16 +237,27 @@
                 </div>
             </div>
 
-            <!-- Promo Strip -->
+            <!-- Podcast Section -->
             <div class="relative bg-zinc-100 overflow-hidden">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col md:flex-row items-center gap-12">
                     <div class="w-full md:w-1/2">
-                        <img src="images/banner-girl.png" alt="Promo" class="w-full max-w-md mx-auto rounded-3xl shadow-2xl">
+                        <img src="images/podcast.png" alt="SHMO Podcast" class="w-full max-w-md mx-auto rounded-3xl shadow-2xl">
                     </div>
                     <div class="w-full md:w-1/2 text-center md:text-left">
-                        <h2 class="text-5xl font-black mb-6 leading-tight uppercase">Switch to SHMOBILE.<br>Earn <span class="text-v-red">$0.50</span>.</h2>
-                        <p class="text-xl text-zinc-600 mb-8">Trade in your old phone (any phone, even a banana) and get fifty whole cents off your first bill. We're serious about your savings.</p>
-                        <button onclick="showPage('plans')" class="bg-black text-white px-10 py-4 font-bold tracking-widest uppercase hover:bg-zinc-800 transition-all">Get Started</button>
+                        <h2 class="text-v-red font-black text-sm tracking-[0.3em] uppercase mb-4">Now Streaming</h2>
+                        <h3 class="text-4xl md:text-5xl font-black mb-6 tracking-tight">THE SHMO PODCAST</h3>
+                        <p class="text-xl text-zinc-600 mb-6">Tune in to the official SHMOBILE podcast. Hot takes, cold calls, and everything in between.</p>
+                        <div class="bg-white rounded-2xl p-6 flex items-center gap-4 shadow-md">
+                            <img src="images/img-radio.png" alt="Radio" class="w-20 h-20 rounded-xl object-cover">
+                            <div class="flex-1">
+                                <p class="font-bold text-lg">Latest Episode</p>
+                                <p class="text-zinc-500 text-sm">Why Gary Deserves a Raise (ft. Gary)</p>
+                            </div>
+                            <button onclick="document.getElementById('podcastAudio').play()" class="bg-v-red text-white w-14 h-14 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-play text-lg ml-1"></i>
+                            </button>
+                        </div>
+                        <audio id="podcastAudio" src="images/download.mp3"></audio>
                     </div>
                 </div>
             </div>
