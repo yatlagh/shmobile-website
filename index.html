@@ -151,37 +151,37 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
                         <div class="group cursor-pointer lg:col-span-2 lg:row-span-2">
-                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg">
+                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg border border-zinc-200">
                                 <img src="images/poster-prime.png" alt="I Shmob 17 Prime Deal" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
                             </div>
                             <h3 class="font-bold text-lg leading-tight group-hover:text-v-red transition-colors">I Shmob 17 — <span class="text-v-red">$0 with 2yr contract</span> | $99 unlocked</h3>
                         </div>
                         <div class="group cursor-pointer">
-                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg">
+                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg border border-zinc-200">
                                 <img src="images/poster1.jpg" alt="Campaign 1" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
                             </div>
                             <h3 class="font-bold text-lg leading-tight group-hover:text-v-red transition-colors">The I Shmob 17 Launch — Spring 2026</h3>
                         </div>
                         <div class="group cursor-pointer">
-                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg">
+                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg border border-zinc-200">
                                 <img src="images/poster2.jpg" alt="Campaign 2" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
                             </div>
                             <h3 class="font-bold text-lg leading-tight group-hover:text-v-red transition-colors">I Shmob Your Way — Lifestyle Collection</h3>
                         </div>
                         <div class="group cursor-pointer">
-                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg">
+                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg border border-zinc-200">
                                 <img src="images/poster3.jpg" alt="Campaign 3" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
                             </div>
                             <h3 class="font-bold text-lg leading-tight group-hover:text-v-red transition-colors">I Shmob — Built Different</h3>
                         </div>
                         <div class="group cursor-pointer">
-                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg">
+                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg border border-zinc-200">
                                 <img src="images/poster4.jpg" alt="Campaign 4" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
                             </div>
                             <h3 class="font-bold text-lg leading-tight group-hover:text-v-red transition-colors">I Shmob Global — Expanding Horizons</h3>
                         </div>
                         <div class="group cursor-pointer">
-                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg">
+                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg border border-zinc-200">
                                 <img src="images/GAMER-PHONE.png" alt="Gamer Phone" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
                             </div>
                             <h3 class="font-bold text-lg leading-tight group-hover:text-v-red transition-colors">I Shmob Gamer Edition — Play Anywhere</h3>
@@ -320,8 +320,8 @@
                                 <p class="font-bold text-lg">Latest Episode</p>
                                 <p class="text-zinc-500 text-sm">Why Gary Deserves a Raise (ft. Gary)</p>
                             </div>
-                            <button onclick="document.getElementById('podcastAudio').play()" class="bg-v-red text-white w-14 h-14 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-play text-lg ml-1"></i>
+                            <button id="podcastBtn" onclick="togglePodcast()" class="bg-v-red text-white w-14 h-14 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                                <i id="podcastIcon" class="fa-solid fa-play text-lg ml-1"></i>
                             </button>
                         </div>
                         <audio id="podcastAudio" src="images/download.mp3"></audio>
@@ -642,6 +642,23 @@
             updateCartBadge();
             showPage('confirmation');
         }
+
+        // Podcast toggle
+        function togglePodcast() {
+            const audio = document.getElementById('podcastAudio');
+            const icon = document.getElementById('podcastIcon');
+            if (audio.paused) {
+                audio.play();
+                icon.className = 'fa-solid fa-pause text-lg';
+                icon.style.marginLeft = '0';
+            } else {
+                audio.pause();
+                icon.className = 'fa-solid fa-play text-lg ml-1';
+            }
+        }
+        document.getElementById('podcastAudio').addEventListener('ended', function() {
+            document.getElementById('podcastIcon').className = 'fa-solid fa-play text-lg ml-1';
+        });
 
         // Open Box Subscribe
         function subscribeDeal() {
