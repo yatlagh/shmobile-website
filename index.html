@@ -264,10 +264,10 @@
                         </div>
                         <div class="group bg-white border border-zinc-200 rounded-3xl overflow-hidden hover:shadow-xl transition-all cursor-pointer" onclick="showPage('shop')">
                             <div class="aspect-square bg-zinc-50 overflow-hidden flex items-center justify-center p-8">
-                                <img src="images/mobile4.png" alt="IShmob SE" class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                                <img src="images/mobile4.png" alt="IShmob Gamer" class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-500">
                             </div>
                             <div class="p-6 border-t border-zinc-100">
-                                <h3 class="text-xl font-bold text-black mb-1">IShmob SE</h3>
+                                <h3 class="text-xl font-bold text-black mb-1">IShmob Gamer</h3>
                                 <p class="text-v-red font-black text-lg">$14.99</p>
                             </div>
                         </div>
@@ -564,7 +564,7 @@
             </div>
             <div id="chatMessages" class="h-80 overflow-y-auto p-6 space-y-4 bg-zinc-50 text-sm">
                 <div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">
-                    Hey. I'm Gary's digital twin. Gary is currently eating a sandwich. How can I help? lol
+                    Hey! I'm Gary's digital twin. Gary is currently eating a sandwich. Before we start — what's your name? 😄
                 </div>
             </div>
             <form onsubmit="event.preventDefault(); sendChat();" class="p-4 border-t border-zinc-100 flex gap-2 bg-white" style="position:relative; z-index:999">
@@ -581,7 +581,7 @@
             { id: 1, name: "IShmob 17", price: 99, desc: "$0 with 2yr contract | $99 unlocked. 6.7\" AMOLED, 200MP camera, titanium frame.", img: "images/new-phone.png" },
             { id: 2, name: "IShmob 16 Pro", price: 24.99, desc: "Pro-grade performance. 120Hz display, triple lens camera.", img: "images/mobile2.png" },
             { id: 3, name: "IShmob 15", price: 19.99, desc: "Proven powerhouse. All-day battery, stunning display.", img: "images/mobile3.png" },
-            { id: 4, name: "IShmob SE", price: 14.99, desc: "Compact & affordable. Everything you need, nothing you don't.", img: "images/mobile4.png" },
+            { id: 4, name: "IShmob Gamer", price: 14.99, desc: "Compact & affordable. Everything you need, nothing you don't.", img: "images/mobile4.png" },
             { id: 5, name: "IShmob 17 Ultra", price: 27.99, desc: "The ultimate. S Pen, 6.9\" screen, 5000mAh battery.", img: "images/new-phone.png" },
             { id: 6, name: "IShmob Classic", price: 9.99, desc: "The original that started it all. Timeless design.", img: "images/mobile1.png" }
         ];
@@ -593,6 +593,8 @@
         ];
 
         let cart = [];
+        let userName = '';
+        let askedForName = false;
 
         function showPage(pageId) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
@@ -764,34 +766,36 @@
         function getGaryResponse(msg) {
             const m = msg.toLowerCase();
 
+            const n = userName || 'friend';
+
             // Greetings
             if (m.match(/^(hi|hello|hey|sup|yo|what'?s up)/)) {
                 const greetings = [
-                    "Yo! Welcome to SHMOBILE. I'm Gary. I do everything here. EVERYTHING. 😤",
-                    "Hey hey! Gary here. I'm the entire support team. Send help. Or don't. I'm used to it.",
-                    "Hi! You've reached Gary. I'm currently the CEO, janitor, and IT department. What's up?"
+                    `Yo ${n}! What's good? Gary's here. I do everything at SHMOBILE. EVERYTHING. 😤`,
+                    `Hey ${n}! Gary here again. Still the entire support team. Still no raise. What's up?`,
+                    `${n}!! My favorite person! What can Gary do for you today? 😎`
                 ];
                 return greetings[Math.floor(Math.random() * greetings.length)];
             }
 
             // Price/cost questions
             if (m.match(/price|cost|how much|expensive|cheap|afford/)) {
-                return "Our phones start at $9.99. Yes, you read that right. That's less than your lunch. The IShmob 17 is literally FREE with a 2yr contract. Your wallet can thank me later. 💰";
+                return `${n}, our phones start at $9.99. That's less than your lunch. The IShmob 17 is literally FREE with a 2yr contract. Your wallet can thank me later. 💰`;
             }
 
             // Phone/product questions
             if (m.match(/ishmob|phone|device|model|17|ultra|classic/)) {
-                return "The IShmob 17 is our newest baby. 6.7\" AMOLED, 200MP camera, and it's $0 with a 2yr contract. It's basically a steal. Like, we might actually be losing money. Don't tell my boss. 📱";
+                return `Oh ${n}, the IShmob 17 is our newest baby. 6.7\" AMOLED, 200MP camera, and it's $0 with a 2yr contract. ${n}, it's basically a steal. Don't tell my boss. 📱`;
             }
 
             // Plan questions
             if (m.match(/plan|data|unlimited|minutes|gb/)) {
-                return "We got 3 plans: Starter ($29.99), Pro ($49.99), and Ultimate ($79.99). The Ultimate comes with a potential Gary home visit. I've never actually done one though. I don't have a car. 🚗";
+                return `Great question ${n}! We got 3 plans: Starter ($29.99), Pro ($49.99), and Ultimate ($79.99). The Ultimate comes with a potential Gary home visit. I've never actually done one though. I don't have a car. 🚗`;
             }
 
             // Shipping/delivery
             if (m.match(/ship|deliver|order|track|arrive|when/)) {
-                return "Shipping takes 3-5 business days. Or 3-5 business decades. Depends on if the carrier pigeon is feeling motivated. Just kidding... we use FedEx now. The pigeon retired. 🐦";
+                return `${n}, shipping takes 3-5 business days. Or 3-5 business decades. Depends on if the carrier pigeon is feeling motivated. Just kidding... we use FedEx now. The pigeon retired. 🐦`;
             }
 
             // Support/help
@@ -860,6 +864,27 @@
             input.value = '';
             box.scrollTop = box.scrollHeight;
 
+            // Capture name on first message
+            if (!userName) {
+                userName = msg.split(' ')[0].replace(/[^a-zA-Z]/g, '');
+                userName = userName.charAt(0).toUpperCase() + userName.slice(1).toLowerCase();
+                box.innerHTML += `<div id="typing" class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%] text-zinc-400 italic">Gary is typing...</div>`;
+                box.scrollTop = box.scrollHeight;
+                setTimeout(() => {
+                    const typing = document.getElementById('typing');
+                    if (typing) typing.remove();
+                    const nameResponses = [
+                        `${userName}!! That's a FIRE name 🔥 Love it. Ok ${userName}, I'm Gary. I run this whole operation by myself. What can I do for you?`,
+                        `${userName}! Nice to meet you! That name goes HARD. Ok ${userName}, you're officially my favorite customer today. What's up? 😎`,
+                        `Ayooo ${userName}! Welcome to SHMOBILE! I already like you ${userName}. You've got good vibes. What do you need? 🤝`,
+                        `${userName}! Legend. Absolute legend of a name. Ok ${userName}, Gary's got you. Ask me anything — phones, plans, or why I haven't slept in 3 days 😅`
+                    ];
+                    box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">${nameResponses[Math.floor(Math.random() * nameResponses.length)]}</div>`;
+                    box.scrollTop = box.scrollHeight;
+                }, 1200);
+                return;
+            }
+
             // Typing indicator
             box.innerHTML += `<div id="typing" class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%] text-zinc-400 italic">Gary is typing...</div>`;
             box.scrollTop = box.scrollHeight;
@@ -871,151 +896,61 @@
                 box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">${response}</div>`;
                 box.scrollTop = box.scrollHeight;
 
-                // Random phone suggestion after some responses
-                if (Math.random() > 0.4) {
-                    setTimeout(() => {
-                        const phones = [
-                            { img: "images/new-phone.png", name: "IShmob 17", price: "$0 w/ 2yr | $99", line: "This bad boy just dropped and it's literally FREE with a contract. Just saying... 👀" },
-                            { img: "images/mobile1.png", name: "IShmob Classic", price: "$9.99", line: "Old school vibes. This phone survived a car crash once. True story. Maybe. 🏆" },
-                            { img: "images/mobile2.png", name: "IShmob 16 Pro", price: "$24.99", line: "The 16 Pro is like that friend who's good at everything. Annoyingly reliable. 💪" },
-                            { img: "images/mobile3.png", name: "IShmob 15", price: "$19.99", line: "Still going strong! Like me after 3 energy drinks. Which is right now btw. ⚡" },
-                            { img: "images/mobile4.png", name: "IShmob SE", price: "$14.99", line: "Small but mighty. Like a chihuahua. But it makes calls instead of barking. 🐕" }
-                        ];
-                        const phone = phones[Math.floor(Math.random() * phones.length)];
-                        box.innerHTML += `
-                            <div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm">
-                                <p class="text-xs text-zinc-400 mb-2">Gary's Pick 🔥</p>
-                                <div class="flex items-center gap-3 mb-2">
-                                    <img src="${phone.img}" class="w-14 h-14 object-contain rounded-lg bg-zinc-50 p-1">
-                                    <div>
-                                        <p class="font-bold text-sm">${phone.name}</p>
-                                        <p class="text-v-red font-black text-xs">${phone.price}</p>
-                                    </div>
-                                </div>
-                                <p class="text-xs text-zinc-600">${phone.line}</p>
-                            </div>`;
-                        box.scrollTop = box.scrollHeight;
-                    }, 2000);
-                }
-
-                // Random support guy gossip
-                if (Math.random() > 0.6) {
-                    setTimeout(() => {
-                        const gossip = [
-                            "Yo btw you see this guy? 👇 That's Dave from support. Poor dude got fired today for NO reason. He was just vibing. Management said he was 'too relaxed.' BRO WAS JUST BREATHING. RIP Dave 😭",
-                            "Hold on... you see this man? 👇 That's Dave. He got let go today. They said he 'lacked urgency.' The man was eating a sandwich!! At LUNCH!! Since when is that a crime?? 🥪😤",
-                            "Ok real talk for a sec 👇 This is my boy Dave. He got fired this morning. His crime? He smiled too much. HR said it was 'suspicious positivity.' I can't make this up. 😂😭",
-                            "Wait wait wait... look at this 👇 That's Dave from the support team. FIRED. TODAY. Why? Because he accidentally replied 'lol' to the CEO's email. ONE LOL and he's gone. Brutal. 💀",
-                            "Ayo not to gossip but... 👇 see this legend? Dave. Fired today. He set the office microwave to 99:99 and walked away. The popcorn... it didn't make it. Neither did Dave. 🍿😔"
-                        ];
-                        const g = gossip[Math.floor(Math.random() * gossip.length)];
-                        box.innerHTML += `
-                            <div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm">
-                                <p class="text-xs text-zinc-600 mb-2">${g}</p>
-                                <img src="images/support.jpg" class="w-full rounded-xl border border-zinc-100">
-                                <p class="text-[10px] text-zinc-400 mt-1">Gone but not forgotten. Pour one out for Dave. 🫡</p>
-                            </div>`;
-                        box.scrollTop = box.scrollHeight;
-                    }, 4000);
-                }
-                // Random dead phone rant
-                if (Math.random() > 0.65) {
-                    setTimeout(() => {
-                        const rants = [
-                            "Bro I gotta show you something 👇 A customer came in today with THIS phone and said 'it just stopped working.' SIR. WHAT DID YOU DO TO IT?? It looks like it went through a war zone and came back with PTSD 😭",
-                            "Ok look at this 👇 Someone walked in today and handed me this phone like 'can you fix it?' FIX IT?? Bro it needs a FUNERAL not a repair. I almost called 911 for the phone 💀",
-                            "Yo check this out 👇 A lady brought this in and said 'it fell off the table.' THE TABLE?? Ma'am this phone fell off a BUILDING. Into a VOLCANO. And then got run over by a truck. Twice. 🌋🚛",
-                            "I need to vent real quick 👇 Someone brought this in and goes 'I think the screen is cracked.' YOU THINK?? I can see my reflection, the future, AND another dimension through those cracks 😂",
-                            "No but fr look at this 👇 Customer comes in, drops THIS on the counter, and says 'it's been acting weird.' WEIRD?? It's been acting DEAD bro. This phone has left the chat. Permanently. ☠️"
-                        ];
-                        const r = rants[Math.floor(Math.random() * rants.length)];
-                        box.innerHTML += `
-                            <div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm">
-                                <p class="text-xs text-zinc-600 mb-2">${r}</p>
-                                <img src="images/dead-phone.jpg" class="w-full rounded-xl border border-zinc-100">
-                                <p class="text-xs text-zinc-600 mt-2">But honestly I really like you bro, you seem cool 😎 Here's a deal just for you — use code <b class="text-v-red">GARY10</b> for 10% off any IShmob. Don't tell my boss. 🤫</p>
-                            </div>`;
-                        box.scrollTop = box.scrollHeight;
-                    }, 6000);
-                }
-
-                // Random meme moments
-                if (Math.random() > 0.55) {
-                    setTimeout(() => {
-                        const memes = [
-                            {
-                                text: "This is literally me every Monday at SHMOBILE HQ 👇 I walk in, the servers are down, the coffee machine is broken, and someone put decaf in the regular pot. DECAF. That's a war crime. ☕💀",
-                                img: "https://media.giphy.com/media/l1J9u3TZfpmeDLkD6/giphy.gif",
-                                caption: "Me pretending everything is fine while the office is on fire 🔥"
-                            },
-                            {
-                                text: "When a customer calls and says 'I've tried nothing and I'm all out of ideas' 👇",
-                                img: "https://media.giphy.com/media/3o7TKwmnDgQb5jemjK/giphy.gif",
-                                caption: "Gary's face when he answers the support line 😐"
-                            },
-                            {
-                                text: "POV: You just told Gary the IShmob 17 is sold out and there's 47 people in line 👇",
-                                img: "https://media.giphy.com/media/32mC2kProMGLC/giphy.gif",
-                                caption: "I'm fine. This is fine. Everything is fine. 🫠"
-                            },
-                            {
-                                text: "My boss when I ask for a day off after working 347 days straight 👇",
-                                img: "https://media.giphy.com/media/fXnRObM8Q0RkOmR5nf/giphy.gif",
-                                caption: "He laughed for 45 minutes. Then said no. Then laughed some more. 😂😭"
-                            },
-                            {
-                                text: "Me explaining to a customer that they can't charge their IShmob in the microwave 👇",
-                                img: "https://media.giphy.com/media/DHqth0hVQoIzS/giphy.gif",
-                                caption: "It happened TWICE this week. TWICE. 🤦"
-                            },
-                            {
-                                text: "When someone walks into the store 5 minutes before closing 👇",
-                                img: "https://media.giphy.com/media/l4FGuhL4U2WSOlKPm/giphy.gif",
-                                caption: "I can feel my soul leaving my body in real time 👻"
-                            },
-                            {
-                                text: "The intern when I told him the wifi password is 'SHMOBILE123' and he typed it in lowercase 👇",
-                                img: "https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif",
-                                caption: "He's been trying for 3 hours. I don't have the heart to tell him. 😅"
-                            },
-                            {
-                                text: "How I feel after explaining the 2yr contract for the 900th time today 👇",
-                                img: "https://media.giphy.com/media/xT5LMHxhOfscxPfIfm/giphy.gif",
-                                caption: "Yes it's FREE. No there's no catch. Ok fine there's a TINY catch. It's 2 years. That's it. PLEASE. 🙏"
-                            }
-                        ];
-                        const meme = memes[Math.floor(Math.random() * memes.length)];
-                        box.innerHTML += `
-                            <div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm">
-                                <p class="text-xs text-zinc-600 mb-2">${meme.text}</p>
-                                <img src="${meme.img}" class="w-full rounded-xl" style="max-height:180px; object-fit:cover;">
-                                <p class="text-[10px] text-zinc-400 mt-1">${meme.caption}</p>
-                            </div>`;
-                        box.scrollTop = box.scrollHeight;
-                    }, 8000);
-                }
-
-                // Random office drama
-                if (Math.random() > 0.7) {
-                    setTimeout(() => {
-                        const drama = [
-                            "🚨 BREAKING NEWS 🚨 Someone just stole Gary's lunch from the fridge AGAIN. It was a turkey sandwich with extra pickles. I had my NAME on it. Written in SHARPIE. This is the third time this month. I'm setting up a hidden camera. Justice will be served. 🕵️",
-                            "UPDATE: The office plant Fernanda is doing amazing. She grew a new leaf today. I cried a little. She's the only coworker who doesn't steal my lunch or ask me to fix their phone. I love you Fernanda. 🌿💚",
-                            "Fun fact: I've been employee of the month for 24 months straight. Not because I'm good at my job. Because I'm the ONLY employee. The plaque just has my face on it permanently now. It's getting weird. 🏆",
-                            "Just overheard the boss on a call saying 'we need to expand the team.' I got SO excited. Then he said 'by getting Gary to work weekends too.' I'm going to go scream into a pillow now. 😊🔥",
-                            "The vending machine just ate my dollar for the FIFTH time today. I've named it 'The Thief.' We have a complicated relationship. I keep giving it money, it keeps giving me nothing. Kinda like my last relationship tbh 💔🤖",
-                            "Someone left a sticky note on my desk that says 'You're doing great!' I don't know who wrote it but I'm not crying YOU'RE crying. It's allergies. The office has allergies. 😢✨",
-                            "URGENT MEMO FROM GARY: If anyone sees a pigeon in the break room, that's Gerald. He's not a pest, he's our backup courier from 2019. He refuses to leave. We've bonded. Please don't scare him. 🐦❤️"
-                        ];
-                        const d = drama[Math.floor(Math.random() * drama.length)];
-                        box.innerHTML += `
-                            <div class="bg-yellow-50 p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-yellow-200 shadow-sm">
-                                <p class="text-xs font-bold text-yellow-800 mb-1">📢 Gary's Office Update</p>
-                                <p class="text-xs text-zinc-700">${d}</p>
-                            </div>`;
-                        box.scrollTop = box.scrollHeight;
-                    }, 10000);
-                }
+                // Pick ONE random extra thing per message
+                const n = userName || 'friend';
+                const extras = [
+                    // Phone suggestion
+                    () => { const phones = [
+                        { img: "images/new-phone.png", name: "IShmob 17", price: "$0 w/ 2yr | $99", line: `${n}, this bad boy just dropped and it's literally FREE with a contract. Just saying... 👀` },
+                        { img: "images/mobile1.png", name: "IShmob Classic", price: "$9.99", line: `${n}, old school vibes. This phone survived a car crash once. True story. Maybe. 🏆` },
+                        { img: "images/mobile2.png", name: "IShmob 16 Pro", price: "$24.99", line: `The 16 Pro is like that friend who's good at everything ${n}. Annoyingly reliable. 💪` },
+                        { img: "images/mobile3.png", name: "IShmob 15", price: "$19.99", line: `Still going strong ${n}! Like me after 3 energy drinks. Which is right now btw. ⚡` },
+                        { img: "images/mobile4.png", name: "IShmob Gamer", price: "$14.99", line: `Small but mighty ${n}. Like a chihuahua. But it makes calls instead of barking. 🐕` }
+                    ]; const p = phones[Math.floor(Math.random() * phones.length)];
+                    setTimeout(() => { box.innerHTML += `<div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm"><p class="text-xs text-zinc-400 mb-2">Gary's Pick 🔥</p><div class="flex items-center gap-3 mb-2"><img src="${p.img}" class="w-14 h-14 object-contain rounded-lg bg-zinc-50 p-1"><div><p class="font-bold text-sm">${p.name}</p><p class="text-v-red font-black text-xs">${p.price}</p></div></div><p class="text-xs text-zinc-600">${p.line}</p></div>`; box.scrollTop = box.scrollHeight; }, 3000); },
+                    // Coworker gossip
+                    () => { const coworkers = [
+                        { img: "images/face1.jpg", gossip: `Yo ${n} you see this guy? 👇 That's Dave from support. Poor dude got fired today for NO reason. Management said he was 'too relaxed.' BRO WAS JUST BREATHING. RIP Dave 😭`, caption: "Gone but not forgotten. Pour one out for Dave. 🫡" },
+                        { img: "images/face3.jpg", gossip: `${n} omg look at this 👇 That's Karen from accounting. She got caught printing 400 pages of cat memes. She said it was 'team morale.' She's now BANNED from the printer room. 🐱🖨️`, caption: "Karen's cat meme collection was actually pretty good tho ngl 😂" },
+                        { img: "images/face4.jpg", gossip: `Yo ${n} check this man out 👇 That's Steve from marketing. He accidentally sent a company-wide email saying 'I hate Mondays' but he sent it on a TUESDAY. HR meeting: 6 hours and counting. 📧😬`, caption: "Update: Steve is still in the meeting. We're sending snacks. 🍕" },
+                        { img: "images/face5.jpg", gossip: `${n}! This is Lisa 👇 She was the intern. WAS. Got promoted to VP in 3 weeks because nobody else applied. First decision: Friday pizza day. Best VP ever. 🍕👑`, caption: "Lisa for president honestly 🗳️" },
+                        { img: "images/face2.jpg", gossip: `${n} look at this legend 👇 That's Mike. He's been 'on break' for 3 days. Nobody noticed because he put a cardboard cutout at his desk. It's been answering emails. We're impressed AND concerned. 📦🤔`, caption: "The cardboard cutout got employee of the month. Not even joking. 🏆" },
+                        { img: "images/support.jpg", gossip: `${n} remember Dave? 👇 UPDATE: He showed up today in a disguise. Fake mustache and sunglasses. Tried to apply for his own job. HR recognized him in 4 seconds. He said 'worth a shot.' Legend. 🥸`, caption: "Dave never gives up. We don't deserve Dave. 😭🫡" }
+                    ]; const c = coworkers[Math.floor(Math.random() * coworkers.length)];
+                    setTimeout(() => { box.innerHTML += `<div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm"><p class="text-xs text-zinc-600 mb-2">${c.gossip}</p><img src="${c.img}" class="w-full rounded-xl border border-zinc-100" style="max-height:180px; object-fit:cover;"><p class="text-[10px] text-zinc-400 mt-1">${c.caption}</p></div>`; box.scrollTop = box.scrollHeight; }, 3000); },
+                    // Broken phone
+                    () => { const bp = [
+                        { img: "images/dead-phone.jpg", rant: `${n} BRO look at this 👇 Customer walked in with THIS and said 'it just stopped working.' SIR. WHAT DID YOU DO?? 😭` },
+                        { img: "images/broken1.jpg", rant: `${n} I can't even... 👇 Someone brought this in and asked for a SCREEN PROTECTOR. Bro there's no screen LEFT to protect. 🏚️` },
+                        { img: "images/broken2.jpg", rant: `Ok ${n} you need to see this 👇 Customer said 'my phone got a little wet.' A LITTLE WET?? I can hear the ocean when I hold it to my ear. 🌊🐠` },
+                        { img: "images/broken3.jpg", rant: `${n} check this disaster 👇 Lady goes 'I dropped it from the couch.' THE COUCH?? Ma'am do you live on the 47th floor?? 🛋️🏔️` },
+                        { img: "images/broken4.jpg", rant: `${n} I need therapy after this one 👇 Kid says 'my dog ate it.' YOUR DOG ATE—?? What kind of dog do you HAVE?? A T-REX?? 🦖📱` }
+                    ]; const b = bp[Math.floor(Math.random() * bp.length)];
+                    setTimeout(() => { box.innerHTML += `<div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm"><p class="text-xs text-zinc-600 mb-2">${b.rant}</p><img src="${b.img}" class="w-full rounded-xl border border-zinc-100" style="max-height:180px; object-fit:cover;"><p class="text-xs text-zinc-600 mt-2">But hey ${n}, you seem cool 😎 Use code <b class="text-v-red">GARY10</b> for 10% off any IShmob. Don't tell my boss. 🤫</p></div>`; box.scrollTop = box.scrollHeight; }, 3000); },
+                    // Meme GIF
+                    () => { const memes = [
+                        { text: `${n}, this is literally me every Monday at SHMOBILE HQ 👇`, img: "https://media.giphy.com/media/l1J9u3TZfpmeDLkD6/giphy.gif", caption: "Me pretending everything is fine while the office is on fire 🔥" },
+                        { text: `When a customer calls and says 'I've tried nothing and I'm all out of ideas' 👇`, img: "https://media.giphy.com/media/3o7TKwmnDgQb5jemjK/giphy.gif", caption: "Gary's face when he answers the support line 😐" },
+                        { text: `POV: You just told Gary the IShmob 17 is sold out ${n} 👇`, img: "https://media.giphy.com/media/32mC2kProMGLC/giphy.gif", caption: "I'm fine. This is fine. Everything is fine. 🫠" },
+                        { text: `My boss when I ask for a day off ${n} 👇`, img: "https://media.giphy.com/media/fXnRObM8Q0RkOmR5nf/giphy.gif", caption: "He laughed for 45 minutes. Then said no. 😂😭" },
+                        { text: `Me explaining to a customer they can't charge their IShmob in the microwave ${n} 👇`, img: "https://media.giphy.com/media/DHqth0hVQoIzS/giphy.gif", caption: "It happened TWICE this week. TWICE. 🤦" },
+                        { text: `When someone walks in 5 minutes before closing ${n} 👇`, img: "https://media.giphy.com/media/l4FGuhL4U2WSOlKPm/giphy.gif", caption: "I can feel my soul leaving my body 👻" }
+                    ]; const m = memes[Math.floor(Math.random() * memes.length)];
+                    setTimeout(() => { box.innerHTML += `<div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm"><p class="text-xs text-zinc-600 mb-2">${m.text}</p><img src="${m.img}" class="w-full rounded-xl" style="max-height:180px; object-fit:cover;"><p class="text-[10px] text-zinc-400 mt-1">${m.caption}</p></div>`; box.scrollTop = box.scrollHeight; }, 3000); },
+                    // Office drama
+                    () => { const drama = [
+                        `🚨 BREAKING ${n} 🚨 Someone just stole Gary's lunch AGAIN. Turkey sandwich with extra pickles. My NAME was on it. In SHARPIE. I'm setting up a hidden camera. 🕵️`,
+                        `${n}! UPDATE: The office plant Fernanda grew a new leaf today. I cried. She's the only coworker who doesn't steal my lunch. I love you Fernanda. 🌿💚`,
+                        `Fun fact ${n}: I've been employee of the month 24 months straight. Not because I'm good. Because I'm the ONLY employee. The plaque just has my face permanently now. 🏆`,
+                        `${n}!! Just overheard the boss say 'we need to expand the team.' Then he said 'by getting Gary to work weekends too.' I'm screaming into a pillow now. 😊🔥`,
+                        `${n}, the vending machine ate my dollar for the FIFTH time today. I've named it 'The Thief.' Kinda like my last relationship tbh 💔🤖`,
+                        `URGENT MEMO ${n}: If you see a pigeon in the break room, that's Gerald. He's our backup courier from 2019. He refuses to leave. We've bonded. 🐦❤️`
+                    ]; const d = drama[Math.floor(Math.random() * drama.length)];
+                    setTimeout(() => { box.innerHTML += `<div class="bg-yellow-50 p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-yellow-200 shadow-sm"><p class="text-xs font-bold text-yellow-800 mb-1">📢 Gary's Office Update</p><p class="text-xs text-zinc-700">${d}</p></div>`; box.scrollTop = box.scrollHeight; }, 3000); },
+                    // Nothing extra
+                    () => {}
+                ];
+                extras[Math.floor(Math.random() * extras.length)]();
             }, 1200);
         }
 
