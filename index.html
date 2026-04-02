@@ -305,7 +305,7 @@
                             <h3 class="text-4xl md:text-5xl font-black mb-6 tracking-tight text-white">OPEN BOX DEALS</h3>
                             <p class="text-xl text-zinc-400 mb-8">Subscribe to get exclusive open box deals delivered straight to your inbox. Massive savings on like-new IShmob devices.</p>
                             <div class="flex flex-col sm:flex-row gap-3">
-                                <input type="email" id="dealEmail" placeholder="Enter your email" class="flex-1 bg-zinc-800 border border-zinc-700 text-white rounded-full px-6 py-4 text-sm focus:ring-2 focus:ring-v-red outline-none placeholder-zinc-500">
+                                <input type="email" id="dealEmail" placeholder="Enter your email" class="flex-1 bg-zinc-800 border border-zinc-700 text-white rounded-full px-6 py-4 text-sm focus:ring-2 focus:ring-v-red outline-none placeholder-zinc-500 relative z-10">
                                 <button onclick="subscribeDeal()" class="bg-v-red text-white px-8 py-4 font-bold tracking-widest uppercase rounded-full hover:bg-red-700 transition-colors">Subscribe</button>
                             </div>
                             <p id="dealMsg" class="text-green-400 text-sm mt-4 hidden">You're in! Watch your inbox for IShmob deals.</p>
@@ -568,7 +568,7 @@
                 </div>
             </div>
             <div class="p-4 border-t border-zinc-100 flex gap-2 bg-white">
-                <input type="text" id="chatInput" placeholder="Message Gary..." class="flex-1 bg-zinc-100 border-none rounded-full px-4 text-sm focus:ring-2 focus:ring-v-red outline-none">
+                <input type="text" id="chatInput" placeholder="Message Gary..." class="flex-1 bg-zinc-100 border-none rounded-full px-4 py-3 text-sm focus:ring-2 focus:ring-v-red outline-none">
                 <button id="chatSend" class="bg-v-red text-white w-10 h-10 rounded-full flex items-center justify-center">
                     <i class="fa-solid fa-paper-plane text-xs"></i>
                 </button>
@@ -867,6 +867,33 @@
                 const response = getGaryResponse(msg);
                 box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">${response}</div>`;
                 box.scrollTop = box.scrollHeight;
+
+                // Random phone suggestion after some responses
+                if (Math.random() > 0.4) {
+                    setTimeout(() => {
+                        const phones = [
+                            { img: "images/new-phone.png", name: "IShmob 17", price: "$0 w/ 2yr | $99", line: "This bad boy just dropped and it's literally FREE with a contract. Just saying... 👀" },
+                            { img: "images/mobile1.png", name: "IShmob Classic", price: "$9.99", line: "Old school vibes. This phone survived a car crash once. True story. Maybe. 🏆" },
+                            { img: "images/mobile2.png", name: "IShmob 16 Pro", price: "$24.99", line: "The 16 Pro is like that friend who's good at everything. Annoyingly reliable. 💪" },
+                            { img: "images/mobile3.png", name: "IShmob 15", price: "$19.99", line: "Still going strong! Like me after 3 energy drinks. Which is right now btw. ⚡" },
+                            { img: "images/mobile4.png", name: "IShmob SE", price: "$14.99", line: "Small but mighty. Like a chihuahua. But it makes calls instead of barking. 🐕" }
+                        ];
+                        const phone = phones[Math.floor(Math.random() * phones.length)];
+                        box.innerHTML += `
+                            <div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm">
+                                <p class="text-xs text-zinc-400 mb-2">Gary's Pick 🔥</p>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <img src="${phone.img}" class="w-14 h-14 object-contain rounded-lg bg-zinc-50 p-1">
+                                    <div>
+                                        <p class="font-bold text-sm">${phone.name}</p>
+                                        <p class="text-v-red font-black text-xs">${phone.price}</p>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-zinc-600">${phone.line}</p>
+                            </div>`;
+                        box.scrollTop = box.scrollHeight;
+                    }, 2000);
+                }
             }, 1200);
         }
 
