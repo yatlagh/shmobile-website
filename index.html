@@ -595,6 +595,7 @@
         let cart = [];
         let userName = '';
         let askedForName = false;
+        let securityStep = 0;
 
         function showPage(pageId) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
@@ -883,24 +884,61 @@
                 return;
             }
 
-            // Second message: capture the name
+            // Second message: capture the name then ask security question
             if (!userName) {
                 userName = msg.split(' ')[0].replace(/[^a-zA-Z]/g, '');
                 userName = userName.charAt(0).toUpperCase() + userName.slice(1).toLowerCase();
+                securityStep = 1;
                 box.innerHTML += `<div id="typing" class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%] text-zinc-400 italic">Gary is typing...</div>`;
                 box.scrollTop = box.scrollHeight;
+                const questions = [
+                    `${userName}! Love that name 🔥 Ok ${userName}, for security purposes I need to verify your identity. Very serious stuff here. Ready? 🔒\n\nQuestion 1: ${userName}, what's your favorite pizza topping? (This is stored in our highly secure database aka my notebook) 🍕`,
+                    `${userName}!! Great name. Ok ${userName}, before we continue I need to run a quick security check. Company policy. Very official. 🔐\n\nQuestion 1: ${userName}, if you were a fruit, what fruit would you be? (Critical security info) 🍉`,
+                    `Ayooo ${userName}! Ok so ${userName}, corporate says I gotta verify your identity. Don't blame me, blame compliance. 🛡️\n\nQuestion 1: ${userName}, what's the name of your childhood pet? Just kidding. What's your favorite color? (Much more important) 🎨`
+                ];
                 setTimeout(() => {
                     const typing = document.getElementById('typing');
                     if (typing) typing.remove();
-                    const nameResponses = [
-                        `${userName}!! That's a FIRE name 🔥 Love it. Ok ${userName}, I'm Gary. I run this whole operation by myself. What can I do for you?`,
-                        `${userName}! Nice to meet you! That name goes HARD. Ok ${userName}, you're officially my favorite customer today. What's up? 😎`,
-                        `Ayooo ${userName}! Welcome to SHMOBILE! I already like you ${userName}. You've got good vibes. What do you need? 🤝`,
-                        `${userName}! Legend. Absolute legend of a name. Ok ${userName}, Gary's got you. Ask me anything — phones, plans, or why I haven't slept in 3 days 😅`
-                    ];
-                    box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">${nameResponses[Math.floor(Math.random() * nameResponses.length)]}</div>`;
+                    box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]" style="white-space:pre-line">${questions[Math.floor(Math.random() * questions.length)]}</div>`;
                     box.scrollTop = box.scrollHeight;
                 }, 1200);
+                return;
+            }
+
+            // Security verification steps
+            if (typeof securityStep !== 'undefined' && securityStep > 0 && securityStep <= 3) {
+                box.innerHTML += `<div id="typing" class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%] text-zinc-400 italic">Gary is verifying...</div>`;
+                box.scrollTop = box.scrollHeight;
+                const step = securityStep;
+                securityStep++;
+                setTimeout(() => {
+                    const typing = document.getElementById('typing');
+                    if (typing) typing.remove();
+                    if (step === 1) {
+                        const q2 = [
+                            `"${msg}" — Interesting choice ${userName}. Very interesting. I'm writing this down. 📝\n\nQuestion 2: ${userName}, on a scale of 1-10, how much do you trust Gary? (The only correct answer is 11) 🤔`,
+                            `${userName} said "${msg}" — NOTED. Adding to your permanent file. Just kidding. Or am I? 👀\n\nQuestion 2: ${userName}, if you had to fight one horse-sized duck or 100 duck-sized horses, which one? (This affects your plan pricing) 🦆🐴`,
+                            `"${msg}" — Excellent ${userName}. Our algorithm is processing... *beep boop* ✅\n\nQuestion 2: ${userName}, what's 2+2? Take your time. No pressure. (3 people got this wrong today) 🧮`
+                        ];
+                        box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]" style="white-space:pre-line">${q2[Math.floor(Math.random() * q2.length)]}</div>`;
+                    } else if (step === 2) {
+                        const q3 = [
+                            `${userName} you're doing amazing. One more ${userName}! 💪\n\nFinal Question: Do you, ${userName}, solemnly swear that you will never put your IShmob in the microwave? 🎤 (Say "I swear" or anything really, I just need to fill out this form)`,
+                            `Perfect answer ${userName}! Almost done, I promise! 🏁\n\nFinal Question: ${userName}, do you agree that Gary is the best support agent you've ever talked to? (Hint: yes) 😎`,
+                            `${userName} you absolute legend. Last one! 🎯\n\nFinal Question: ${userName}, will you leave a 5-star review for Gary? My annual review is next week and I really need this ${userName}. PLEASE. ⭐⭐⭐⭐⭐`
+                        ];
+                        box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]" style="white-space:pre-line">${q3[Math.floor(Math.random() * q3.length)]}</div>`;
+                    } else if (step === 3) {
+                        securityStep = 0;
+                        const verified = [
+                            `✅ IDENTITY VERIFIED ✅\n\nWelcome ${userName}! You have been officially verified as a Real Human™ and not a robot. Although honestly ${userName}, a robot would've answered faster. 🤖\n\nAnyway ${userName}, what can Gary help you with today?`,
+                            `🔓 ACCESS GRANTED 🔓\n\n${userName}, you passed! Congrats! You are now a verified SHMOBILE VIP. That comes with zero extra benefits but it sounds cool right ${userName}? 😎\n\nSo what's on your mind?`,
+                            `🎉 VERIFICATION COMPLETE 🎉\n\nWelcome to the inner circle ${userName}! You now have access to... the exact same stuff as before. But now I know your name ${userName}, and that's what really matters. 💚\n\nHow can I help?`
+                        ];
+                        box.innerHTML += `<div class="bg-green-50 p-3 rounded-2xl rounded-bl-none max-w-[80%] border border-green-200" style="white-space:pre-line">${verified[Math.floor(Math.random() * verified.length)]}</div>`;
+                    }
+                    box.scrollTop = box.scrollHeight;
+                }, 1500);
                 return;
             }
 
