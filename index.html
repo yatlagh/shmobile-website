@@ -564,7 +564,7 @@
             </div>
             <div id="chatMessages" class="h-80 overflow-y-auto p-6 space-y-4 bg-zinc-50 text-sm">
                 <div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">
-                    Hey! I'm Gary's digital twin. Gary is currently eating a sandwich. Before we start — what's your name? 😄
+                    Hey! I'm Gary's digital twin. Gary is currently eating a sandwich. How can I help? 😄
                 </div>
             </div>
             <form onsubmit="event.preventDefault(); sendChat();" class="p-4 border-t border-zinc-100 flex gap-2 bg-white" style="position:relative; z-index:999">
@@ -864,7 +864,26 @@
             input.value = '';
             box.scrollTop = box.scrollHeight;
 
-            // Capture name on first message
+            // First message: respond normally then ask for name
+            if (!askedForName) {
+                askedForName = true;
+                box.innerHTML += `<div id="typing" class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%] text-zinc-400 italic">Gary is typing...</div>`;
+                box.scrollTop = box.scrollHeight;
+                setTimeout(() => {
+                    const typing = document.getElementById('typing');
+                    if (typing) typing.remove();
+                    const response = getGaryResponse(msg);
+                    box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">${response}</div>`;
+                    box.scrollTop = box.scrollHeight;
+                    setTimeout(() => {
+                        box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">Oh btw, I didn't catch your name! What should I call you? 😄</div>`;
+                        box.scrollTop = box.scrollHeight;
+                    }, 1500);
+                }, 1200);
+                return;
+            }
+
+            // Second message: capture the name
             if (!userName) {
                 userName = msg.split(' ')[0].replace(/[^a-zA-Z]/g, '');
                 userName = userName.charAt(0).toUpperCase() + userName.slice(1).toLowerCase();
