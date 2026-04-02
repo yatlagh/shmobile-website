@@ -461,6 +461,26 @@
         </div>
     </div>
 
+    <!-- Video Popup Ad -->
+    <div id="videoPopup" class="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-sm">
+        <div class="relative w-[90%] max-w-3xl bg-zinc-950 rounded-3xl overflow-hidden shadow-2xl border border-zinc-800">
+            <div class="flex justify-between items-center px-6 py-4 bg-black">
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 rounded-full bg-v-red animate-pulse"></div>
+                    <h3 class="text-white font-black uppercase tracking-widest text-sm">SHMOBILE IN ACTION</h3>
+                </div>
+                <button onclick="closeVideoPopup()" class="text-zinc-400 hover:text-white text-2xl font-bold leading-none transition-colors">&times;</button>
+            </div>
+            <video id="popupVideo" class="w-full" controls autoplay muted playsinline>
+                <source src="images/video.mp4" type="video/mp4">
+            </video>
+            <div class="px-6 py-4 bg-black flex items-center justify-between">
+                <p class="text-zinc-400 text-sm">Experience the SHMO difference.</p>
+                <button onclick="closeVideoPopup(); showPage('shop');" class="bg-v-red text-white px-6 py-2 font-bold text-sm uppercase tracking-widest rounded-full hover:bg-red-700 transition-colors">Shop Now</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Notifications Toast -->
     <div id="toast" class="fixed top-24 right-8 z-[100] transform translate-x-full transition-transform duration-300 pointer-events-none">
         <div class="bg-zinc-900 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-4">
@@ -602,6 +622,14 @@
             cart = [];
             updateCartBadge();
             showPage('confirmation');
+        }
+
+        // Video Popup
+        function closeVideoPopup() {
+            const popup = document.getElementById('videoPopup');
+            const video = document.getElementById('popupVideo');
+            video.pause();
+            popup.style.display = 'none';
         }
 
         // Chat Logic
