@@ -126,26 +126,26 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <div class="group cursor-pointer">
-                            <div class="overflow-hidden mb-4 bg-zinc-100 aspect-[4/5] rounded-lg">
-                                <img src="images/poster1.jpg" alt="Campaign 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg">
+                                <img src="images/poster1.jpg" alt="Campaign 1" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
                             </div>
                             <h3 class="font-bold text-lg leading-tight group-hover:text-v-red transition-colors">The SHMO Revolution — Spring 2026</h3>
                         </div>
                         <div class="group cursor-pointer">
-                            <div class="overflow-hidden mb-4 bg-zinc-100 aspect-[4/5] rounded-lg">
-                                <img src="images/poster2.jpg" alt="Campaign 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg">
+                                <img src="images/poster2.jpg" alt="Campaign 2" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
                             </div>
                             <h3 class="font-bold text-lg leading-tight group-hover:text-v-red transition-colors">SHMO Your Way — Lifestyle Collection</h3>
                         </div>
                         <div class="group cursor-pointer">
-                            <div class="overflow-hidden mb-4 bg-zinc-100 aspect-[4/5] rounded-lg">
-                                <img src="images/poster3.jpg" alt="Campaign 3" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg">
+                                <img src="images/poster3.jpg" alt="Campaign 3" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
                             </div>
                             <h3 class="font-bold text-lg leading-tight group-hover:text-v-red transition-colors">Built Different — Innovation at Scale</h3>
                         </div>
                         <div class="group cursor-pointer">
-                            <div class="overflow-hidden mb-4 bg-zinc-100 aspect-[4/5] rounded-lg">
-                                <img src="images/poster4.jpg" alt="Campaign 4" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="overflow-hidden mb-4 bg-zinc-100 rounded-lg">
+                                <img src="images/poster4.jpg" alt="Campaign 4" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
                             </div>
                             <h3 class="font-bold text-lg leading-tight group-hover:text-v-red transition-colors">SHMO Global — Expanding Horizons</h3>
                         </div>
@@ -182,6 +182,46 @@
                             <h3 class="text-2xl font-bold mb-3">Pro-Gaming Ready</h3>
                             <p class="text-zinc-400">Snake pre-installed with global competitive matchmaking. 47 pixels of pure, unadulterated adrenaline.</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Podcast Section -->
+            <div class="py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row items-center gap-12">
+                        <div class="w-full md:w-1/2">
+                            <img src="images/podcast.png" alt="SHMO Podcast" class="w-full rounded-3xl shadow-2xl">
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <h2 class="text-v-red font-black text-sm tracking-[0.3em] uppercase mb-4">Now Streaming</h2>
+                            <h3 class="text-4xl md:text-5xl font-black mb-6 tracking-tight">THE SHMO PODCAST</h3>
+                            <p class="text-xl text-zinc-600 mb-6">Tune in to the official SHMOBILE podcast. Hot takes, cold calls, and everything in between.</p>
+                            <div class="bg-zinc-100 rounded-2xl p-6 flex items-center gap-4">
+                                <img src="images/img-radio.png" alt="Radio" class="w-20 h-20 rounded-xl object-cover">
+                                <div class="flex-1">
+                                    <p class="font-bold text-lg">Latest Episode</p>
+                                    <p class="text-zinc-500 text-sm">Why Gary Deserves a Raise (ft. Gary)</p>
+                                </div>
+                                <button onclick="document.getElementById('podcastAudio').play()" class="bg-v-red text-white w-14 h-14 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-play text-lg ml-1"></i>
+                                </button>
+                            </div>
+                            <audio id="podcastAudio" src="images/download.mp3"></audio>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Section -->
+            <div class="py-24 bg-zinc-950">
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-v-red font-black text-sm tracking-[0.3em] uppercase mb-4">Watch</h2>
+                    <h3 class="text-4xl md:text-5xl font-black text-white mb-12 tracking-tight">SHMOBILE IN ACTION</h3>
+                    <div class="rounded-3xl overflow-hidden shadow-2xl">
+                        <video class="w-full" controls poster="images/banner-girl.png">
+                            <source src="images/video.mp4" type="video/mp4">
+                        </video>
                     </div>
                 </div>
             </div>
@@ -393,11 +433,11 @@
 
     <script>
         const products = [
-            { id: 1, name: "SHMO Prime Elite", price: 199.99, desc: "The flagship. Titanium-shmo casing.", img: "images/poster1.jpg" },
-            { id: 2, name: "SHMO Flip Z", price: 149.99, desc: "Classic flip. Modern vibe.", img: "images/poster2.jpg" },
-            { id: 3, name: "SHMO Brick", price: 89.99, desc: "Literally a brick that makes calls.", img: "images/poster3.jpg" },
-            { id: 4, name: "SHMO Nano", price: 59.99, desc: "Smaller than your thumb. Hard to lose.", img: "images/poster4.jpg" },
-            { id: 5, name: "SHMO Gamer Pro", price: 249.99, desc: "Optimized for Snake High-FPS.", img: "images/poster1.jpg" }
+            { id: 1, name: "SHMO Prime Elite", price: 199.99, desc: "The flagship. Titanium-shmo casing.", img: "images/mobile1.png" },
+            { id: 2, name: "SHMO Flip Z", price: 149.99, desc: "Classic flip. Modern vibe.", img: "images/mobile2.png" },
+            { id: 3, name: "SHMO Brick", price: 89.99, desc: "Literally a brick that makes calls.", img: "images/mobile3.png" },
+            { id: 4, name: "SHMO Nano", price: 59.99, desc: "Smaller than your thumb. Hard to lose.", img: "images/mobile4.png" },
+            { id: 5, name: "SHMO Gamer Pro", price: 249.99, desc: "Optimized for Snake High-FPS.", img: "images/mobile1.png" }
         ];
 
         const plans = [
@@ -422,8 +462,8 @@
             const grid = document.getElementById('shopGrid');
             grid.innerHTML = products.map(p => `
                 <div class="group bg-zinc-50 border border-zinc-200 rounded-3xl overflow-hidden hover:shadow-xl transition-all">
-                    <div class="aspect-square bg-zinc-100 overflow-hidden">
-                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+                    <div class="aspect-square bg-zinc-100 overflow-hidden flex items-center justify-center p-8">
+                        <img src="${p.img}" alt="${p.name}" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform">
                     </div>
                     <div class="p-8">
                         <div class="flex justify-between items-start mb-2">
