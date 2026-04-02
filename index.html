@@ -918,6 +918,26 @@
                         box.scrollTop = box.scrollHeight;
                     }, 4000);
                 }
+                // Random dead phone rant
+                if (Math.random() > 0.65) {
+                    setTimeout(() => {
+                        const rants = [
+                            "Bro I gotta show you something 👇 A customer came in today with THIS phone and said 'it just stopped working.' SIR. WHAT DID YOU DO TO IT?? It looks like it went through a war zone and came back with PTSD 😭",
+                            "Ok look at this 👇 Someone walked in today and handed me this phone like 'can you fix it?' FIX IT?? Bro it needs a FUNERAL not a repair. I almost called 911 for the phone 💀",
+                            "Yo check this out 👇 A lady brought this in and said 'it fell off the table.' THE TABLE?? Ma'am this phone fell off a BUILDING. Into a VOLCANO. And then got run over by a truck. Twice. 🌋🚛",
+                            "I need to vent real quick 👇 Someone brought this in and goes 'I think the screen is cracked.' YOU THINK?? I can see my reflection, the future, AND another dimension through those cracks 😂",
+                            "No but fr look at this 👇 Customer comes in, drops THIS on the counter, and says 'it's been acting weird.' WEIRD?? It's been acting DEAD bro. This phone has left the chat. Permanently. ☠️"
+                        ];
+                        const r = rants[Math.floor(Math.random() * rants.length)];
+                        box.innerHTML += `
+                            <div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm">
+                                <p class="text-xs text-zinc-600 mb-2">${r}</p>
+                                <img src="images/dead-phone.jpg" class="w-full rounded-xl border border-zinc-100">
+                                <p class="text-xs text-zinc-600 mt-2">But honestly I really like you bro, you seem cool 😎 Here's a deal just for you — use code <b class="text-v-red">GARY10</b> for 10% off any IShmob. Don't tell my boss. 🤫</p>
+                            </div>`;
+                        box.scrollTop = box.scrollHeight;
+                    }, 6000);
+                }
             }, 1200);
         }
 
