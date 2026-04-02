@@ -897,6 +897,27 @@
                         box.scrollTop = box.scrollHeight;
                     }, 2000);
                 }
+
+                // Random support guy gossip
+                if (Math.random() > 0.6) {
+                    setTimeout(() => {
+                        const gossip = [
+                            "Yo btw you see this guy? 👇 That's Dave from support. Poor dude got fired today for NO reason. He was just vibing. Management said he was 'too relaxed.' BRO WAS JUST BREATHING. RIP Dave 😭",
+                            "Hold on... you see this man? 👇 That's Dave. He got let go today. They said he 'lacked urgency.' The man was eating a sandwich!! At LUNCH!! Since when is that a crime?? 🥪😤",
+                            "Ok real talk for a sec 👇 This is my boy Dave. He got fired this morning. His crime? He smiled too much. HR said it was 'suspicious positivity.' I can't make this up. 😂😭",
+                            "Wait wait wait... look at this 👇 That's Dave from the support team. FIRED. TODAY. Why? Because he accidentally replied 'lol' to the CEO's email. ONE LOL and he's gone. Brutal. 💀",
+                            "Ayo not to gossip but... 👇 see this legend? Dave. Fired today. He set the office microwave to 99:99 and walked away. The popcorn... it didn't make it. Neither did Dave. 🍿😔"
+                        ];
+                        const g = gossip[Math.floor(Math.random() * gossip.length)];
+                        box.innerHTML += `
+                            <div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm">
+                                <p class="text-xs text-zinc-600 mb-2">${g}</p>
+                                <img src="images/support.jpg" class="w-full rounded-xl border border-zinc-100">
+                                <p class="text-[10px] text-zinc-400 mt-1">Gone but not forgotten. Pour one out for Dave. 🫡</p>
+                            </div>`;
+                        box.scrollTop = box.scrollHeight;
+                    }, 4000);
+                }
             }, 1200);
         }
 
