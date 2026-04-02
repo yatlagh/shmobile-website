@@ -59,7 +59,7 @@
 <body class="bg-white text-black overflow-x-hidden">
 
     <!-- Video Popup Ad -->
-    <div id="videoPopup" class="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-sm">
+    <div id="videoPopup" class="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-sm" style="display:none">
         <div class="relative w-[90%] max-w-3xl bg-zinc-950 rounded-3xl overflow-hidden shadow-2xl border border-zinc-800">
             <div class="flex justify-between items-center px-6 py-4 bg-black">
                 <div class="flex items-center gap-3">
@@ -632,7 +632,17 @@
             }
         }
 
-        // Video Popup
+        // Video Popup - show on scroll to bottom
+        let popupShown = false;
+        window.addEventListener('scroll', function() {
+            if (popupShown) return;
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+                popupShown = true;
+                document.getElementById('videoPopup').style.display = 'flex';
+                document.getElementById('popupVideo').play();
+            }
+        });
+
         function closeVideoPopup() {
             const popup = document.getElementById('videoPopup');
             const video = document.getElementById('popupVideo');
