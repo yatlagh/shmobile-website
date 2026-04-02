@@ -254,6 +254,27 @@
                 </div>
             </div>
 
+            <!-- Open Box Deals Section -->
+            <div class="py-24 bg-zinc-950">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row items-center gap-12">
+                        <div class="w-full md:w-1/2">
+                            <img src="images/openbox.png" alt="Open Box Deals" class="w-full max-w-lg mx-auto rounded-3xl">
+                        </div>
+                        <div class="w-full md:w-1/2 text-center md:text-left">
+                            <h2 class="text-v-red font-black text-sm tracking-[0.3em] uppercase mb-4">Limited Time</h2>
+                            <h3 class="text-4xl md:text-5xl font-black mb-6 tracking-tight text-white">OPEN BOX DEALS</h3>
+                            <p class="text-xl text-zinc-400 mb-8">Subscribe to get exclusive open box deals delivered straight to your inbox. Massive savings on like-new SHMO devices.</p>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <input type="email" id="dealEmail" placeholder="Enter your email" class="flex-1 bg-zinc-800 border border-zinc-700 text-white rounded-full px-6 py-4 text-sm focus:ring-2 focus:ring-v-red outline-none placeholder-zinc-500">
+                                <button onclick="subscribeDeal()" class="bg-v-red text-white px-8 py-4 font-bold tracking-widest uppercase rounded-full hover:bg-red-700 transition-colors">Subscribe</button>
+                            </div>
+                            <p id="dealMsg" class="text-green-400 text-sm mt-4 hidden">You're in! Watch your inbox for SHMO deals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Podcast Section -->
             <div class="relative bg-zinc-100 overflow-hidden">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col md:flex-row items-center gap-12">
@@ -602,6 +623,16 @@
             cart = [];
             updateCartBadge();
             showPage('confirmation');
+        }
+
+        // Open Box Subscribe
+        function subscribeDeal() {
+            const email = document.getElementById('dealEmail').value.trim();
+            if(email && email.includes('@')) {
+                document.getElementById('dealMsg').classList.remove('hidden');
+                document.getElementById('dealEmail').value = '';
+                showToast('Subscribed to Open Box Deals!');
+            }
         }
 
         // Video Popup
