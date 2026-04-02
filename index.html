@@ -567,12 +567,12 @@
                     Hey. I'm Gary's digital twin. Gary is currently eating a sandwich. How can I help? lol
                 </div>
             </div>
-            <div class="p-4 border-t border-zinc-100 flex gap-2 bg-white">
-                <input type="text" id="chatInput" placeholder="Message Gary..." class="flex-1 bg-zinc-100 border-none rounded-full px-4 py-3 text-sm focus:ring-2 focus:ring-v-red outline-none">
-                <button id="chatSend" class="bg-v-red text-white w-10 h-10 rounded-full flex items-center justify-center">
+            <form onsubmit="event.preventDefault(); sendChat();" class="p-4 border-t border-zinc-100 flex gap-2 bg-white" style="position:relative; z-index:999">
+                <input type="text" id="chatInput" placeholder="Message Gary..." style="width:100%; padding:12px 16px; background:#f4f4f5; border:1px solid #e4e4e7; border-radius:9999px; font-size:14px; outline:none;">
+                <button type="submit" class="bg-v-red text-white rounded-full flex items-center justify-center" style="width:40px; height:40px; min-width:40px; cursor:pointer; border:none;">
                     <i class="fa-solid fa-paper-plane text-xs"></i>
                 </button>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -900,8 +900,7 @@
             }, 1200);
         }
 
-        document.getElementById('chatSend').onclick = sendChat;
-        document.getElementById('chatInput').onkeypress = (e) => e.key === 'Enter' && sendChat();
+        // Chat send handled by form submit
 
         // Init
         window.onload = () => {
