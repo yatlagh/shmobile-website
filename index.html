@@ -1,456 +1,560 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SHMOBILE Wireless — Can You SHMO Me Now?</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" type="image/png" href="images/logo.png">
-</head>
-<body>
-  <!-- Page Container -->
-  <div class="page-container">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHMOBILE | Can You SHMO Me Now?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .v-red { color: #ed1c24; }
+        .bg-v-red { background-color: #ed1c24; }
+        .border-v-red { border-color: #ed1c24; }
 
-    <!-- ===== TOP HEADER ===== -->
-    <header class="site-header">
-      <div class="header-inner">
-        <div class="header-logo">
-          <div class="logo-box">
-            <img src="images/logo.png" alt="SHMOBILE" class="logo-img">
-          </div>
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #ed1c24;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        .hero-gradient {
+            background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            animation: marquee 30s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-white text-black overflow-x-hidden">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-black text-white text-xs py-2 overflow-hidden whitespace-nowrap border-b border-zinc-800">
+        <div class="animate-marquee inline-block">
+            *** BREAKING: SHMO ICON NOW AVAILABLE FOR FREE WITH ANY PLAN! — GET UNLIMITED SHMO FOR ONLY $49.99/MO! — SHMOBILE NETWORK EXPANDING TO 4TH CITY! — SNAKE GAME LEADERBOARD NOW LIVE! ***
         </div>
-        <div class="header-right">
-          <div class="header-date" id="headerDate">Thursday, April 2, 2026</div>
-          <a href="#" class="header-login">Login to MySHMO</a>
+    </div>
+
+    <!-- Header / Nav -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-zinc-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-8">
+                    <a href="#" onclick="showPage('home')" class="flex items-center gap-3">
+                        <img src="images/logo.png" alt="SHMOBILE" class="h-10 w-auto">
+                        <span class="text-2xl font-black tracking-tighter text-black flex items-center gap-1">
+                            SHMOBILE<span class="text-v-red italic text-3xl leading-none">/</span>
+                        </span>
+                    </a>
+                    <nav class="hidden md:flex space-x-8 text-sm font-semibold tracking-wide uppercase">
+                        <a href="#" onclick="showPage('shop')" class="nav-link relative transition-colors hover:text-v-red">Phones</a>
+                        <a href="#" onclick="showPage('plans')" class="nav-link relative transition-colors hover:text-v-red">Plans</a>
+                        <a href="#" onclick="showPage('about')" class="nav-link relative transition-colors hover:text-v-red">About</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-6 text-sm">
+                    <div id="headerDate" class="hidden lg:block text-zinc-400 font-medium">Thursday, April 2, 2026</div>
+                    <a href="#" class="font-bold hover:underline">MySHMO Login</a>
+                    <a href="#" onclick="showPage('cart')" class="relative p-2 bg-zinc-100 rounded-full hover:bg-zinc-200 transition-colors">
+                        <i class="fa-solid fa-cart-shopping text-lg"></i>
+                        <span id="cartBadge" class="absolute -top-1 -right-1 bg-v-red text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
     </header>
 
-    <!-- ===== NAVIGATION ===== -->
-    <nav class="main-nav" id="mainNav">
-      <a href="#" class="nav-item active" data-page="home">Home</a>
-      <a href="#" class="nav-item" data-page="shop">Phones</a>
-      <a href="#" class="nav-item" data-page="plans">Plans</a>
-      <a href="#" class="nav-item" data-page="about">About</a>
-      <a href="#" class="nav-item" data-page="cart">Cart (<span id="cartBadge">0</span>)</a>
-    </nav>
-
-    <!-- ===== MARQUEE ===== -->
-    <div class="marquee-bar">
-      <div class="marquee-track" id="marqueeTrack">
-        *** BREAKING: SHMO ICON NOW AVAILABLE FOR FREE WITH ANY PLAN! --- GET UNLIMITED SHMO FOR ONLY $49.99/MO! --- SHMOBILE NETWORK EXPANDING TO 4TH CITY! --- SNAKE GAME LEADERBOARD NOW LIVE! ***
-      </div>
-    </div>
-
-    <!-- ===== PAGES ===== -->
     <main id="app">
-
-      <!-- ========== HOME PAGE ========== -->
-      <div class="page active" id="page-home">
-
-        <!-- Hero -->
-        <div class="hero-split">
-          <div class="hero-main">
-            <div class="hero-content">
-              <h1 class="hero-title">CAN YOU SHMO ME NOW?</h1>
-              <h2 class="hero-sub">Upgrade to the Newest SHMO Phones!</h2>
-              <p class="hero-text">
-                Experience the power of the <b>SHMO Network™</b>. Crystal clear calls,
-                Snake game streaming, and coverage in at least 3 cities nationwide.
-                Don't get left behind in the SHMO revolution.
-              </p>
-              <div class="hero-links">
-                <a href="#" data-page="plans">&#9654; View Calling Plans</a>
-                <a href="#" data-page="shop">&#9654; Browse All Phones</a>
-                <a href="#" data-page="about">&#9654; About SHMOBILE</a>
-              </div>
-              <button class="btn-retro btn-red-3d" data-page="shop">SHOP NOW!</button>
-            </div>
-          </div>
-          <div class="hero-sidebar">
-            <div class="sidebar-box">
-              <h3 class="sidebar-box-title">SHMOBILE TV</h3>
-              <div class="sidebar-video">
-                <video src="images/video.mp4" autoplay muted loop playsinline></video>
-              </div>
-            </div>
-            <button class="btn-radio" id="radioBtn">📻 SHMO FM 98.7 — Listen Now</button>
-            <div class="radio-player" id="radioPlayer">
-              <img src="images/podcast.png" alt="SHMO FM" class="radio-poster">
-              <audio id="radioAudio" src="images/download.wav" controls></audio>
-            </div>
-          </div>
-        </div>
-
-        <!-- Poster Gallery -->
-        <div class="section-box">
-          <h3 class="box-title-bar">SHMOBILE Campaigns</h3>
-          <div class="poster-grid-retro">
-            <div class="poster-cell">
-              <img src="images/poster1.jpg" alt="Campaign 1">
-              <p class="poster-caption">The SHMO Revolution — Spring 2026</p>
-            </div>
-            <div class="poster-cell">
-              <img src="images/poster2.jpg" alt="Campaign 2">
-              <p class="poster-caption">SHMO Your Way — Lifestyle</p>
-            </div>
-            <div class="poster-cell">
-              <img src="images/poster3.jpg" alt="Campaign 3">
-              <p class="poster-caption">Built Different — Innovation</p>
-            </div>
-            <div class="poster-cell">
-              <img src="images/poster4.jpg" alt="Campaign 4">
-              <p class="poster-caption">SHMO Goes Worldwide</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Quick Links -->
-        <div class="quick-links-row">
-          <div class="quick-link-cell">
-            <h4><span class="ql-icon">📱</span> <a href="#" data-page="shop">SHMO Phones</a></h4>
-            <p>Browse our full lineup of indestructible, feature-packed mobile devices!</p>
-          </div>
-          <div class="quick-link-cell">
-            <h4><span class="ql-icon">📡</span> <a href="#" data-page="plans">SHMO Network</a></h4>
-            <p>Coverage in at least 3 major cities and that one gas station off Highway 9.</p>
-          </div>
-          <div class="quick-link-cell">
-            <h4><span class="ql-icon">🐍</span> <a href="#">Snake Game</a></h4>
-            <p>The only game you'll ever need. Now with competitive ranked mode!</p>
-          </div>
-        </div>
-
-        <!-- Featured Phones -->
-        <div class="section-box">
-          <h3 class="box-title-bar">Featured Phones — Handpicked by Our SHMOlogists</h3>
-          <div class="product-table-wrap" id="featuredGrid"></div>
-        </div>
-
-        <!-- Why SHMOBILE -->
-        <div class="section-box">
-          <h3 class="box-title-bar">Why SHMOBILE?</h3>
-          <table class="info-table">
-            <thead>
-              <tr>
-                <th>Feature</th>
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="feature-name">🔋 7-Day Battery Life</td>
-                <td>Our phones last so long, you'll forget what a charger looks like. Seriously, we had to include a reminder app.</td>
-              </tr>
-              <tr>
-                <td class="feature-name">🛡️ Indestructible Design</td>
-                <td>We drove a truck over it. Then a tank. Then dropped it from a helicopter. It asked for more.</td>
-              </tr>
-              <tr>
-                <td class="feature-name">🐍 Snake Game Pre-installed</td>
-                <td>The only game you'll ever need. Comes with online leaderboards and a competitive ranked mode.</td>
-              </tr>
-              <tr>
-                <td class="feature-name">📡 SHMO Network™</td>
-                <td>Our patented network covers at least 3 major cities and that one gas station off Highway 9.</td>
-              </tr>
-              <tr>
-                <td class="feature-name">🎵 Custom Ringtones</td>
-                <td>Choose from over 4 polyphonic ringtones, including the classic "SHMO Anthem" and "Beep."</td>
-              </tr>
-              <tr>
-                <td class="feature-name">🤝 24/7 Support*</td>
-                <td>*24 minutes, 7 days a year. Our support team, Gary, is doing his best.</td>
-              </tr>
-            </tbody>
-          </table>
-          <p class="table-fine-print">* Plus applicable taxes and SHMO surcharges. Support availability may vary. Gary has Tuesdays off.</p>
-        </div>
-
-        <!-- Banner Girl Promo -->
-        <div class="promo-strip">
-          <div class="promo-strip-img">
-            <img src="images/banner-girl.png" alt="Switch to SHMOBILE">
-          </div>
-          <div class="promo-strip-text">
-            <h3>Switch to SHMOBILE Today!</h3>
-            <p>Trade in your old phone (any phone, even a banana) and get <b>$0.50 off</b> your first bill!</p>
-            <button class="btn-retro btn-red-3d" data-page="plans">SEE PLANS</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- ========== SHOP PAGE ========== -->
-      <div class="page" id="page-shop">
-        <div class="page-title-bar">
-          <h2>All SHMO Phones</h2>
-          <p>Find the perfect SHMO for you. Each one is equally questionable.</p>
-        </div>
-        <div class="section-box">
-          <div class="product-table-wrap" id="shopGrid"></div>
-        </div>
-      </div>
-
-      <!-- ========== PLANS PAGE ========== -->
-      <div class="page" id="page-plans">
-        <div class="page-title-bar">
-          <h2>SHMOBILE Calling Plans</h2>
-          <p>Choose your level of commitment to the SHMO lifestyle.</p>
-        </div>
-        <div class="section-box">
-          <table class="info-table plans-table" id="plansTable">
-            <thead>
-              <tr>
-                <th>Plan Name</th>
-                <th>Details</th>
-                <th>Monthly Access</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody id="plansBody"></tbody>
-          </table>
-          <p class="table-fine-print">* Plus monthly taxes and SHMO surcharges. $0 activation fee applies (we forgot to charge it). Night hours: whenever Gary is asleep.</p>
-        </div>
-
-        <!-- Plan detail cards -->
-        <div class="plans-detail-grid" id="plansGrid"></div>
-      </div>
-
-      <!-- ========== ABOUT PAGE ========== -->
-      <div class="page" id="page-about">
-        <div class="page-title-bar">
-          <h2>About SHMOBILE</h2>
-          <p>The untold story of wireless innovation (mostly untold for legal reasons)</p>
-        </div>
-        <div class="section-box">
-          <h3 class="box-title-bar">Our Story</h3>
-          <div class="about-content">
-            <p>Founded in 2002 in a garage in Shmoville, SHMOBILE set out to answer one question: <em>"Can you SHMO me now?"</em> The answer, as it turned out, was yes.</p>
-            <p>What started as a college project that got wildly out of hand, SHMOBILE quickly grew into the world's most fictional wireless carrier. Armed with nothing but a dream, three soldering irons, and a suspiciously large supply of red plastic, our founders built the first SHMO prototype — a phone so durable, it survived being thrown at a wall during the investor pitch.</p>
-            <p>Today, SHMOBILE serves literally dozens of customers across at least 3 metropolitan areas. Our commitment to providing adequate wireless service at questionable prices remains as strong as our phones (which is very strong — seriously, try breaking one).</p>
-            <h4 class="about-h4">Our Mission</h4>
-            <p>To put a SHMO in every pocket, whether they asked for one or not. We believe that everyone deserves access to a phone that can double as a self-defense weapon, a doorstop, and occasionally, a communication device.</p>
-          </div>
-        </div>
-
-        <div class="section-box">
-          <h3 class="box-title-bar">Meet the Team</h3>
-          <table class="info-table team-table">
-            <thead>
-              <tr>
-                <th style="width:60px;"></th>
-                <th>Name</th>
-                <th>Title</th>
-                <th>Quote</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><div class="team-avatar-sm red">SJ</div></td>
-                <td class="feature-name">Shmo Johnson</td>
-                <td>Chief SHMO Officer</td>
-                <td class="team-quote">"I eat, sleep, and breathe SHMO. Mostly because my office is also my bedroom."</td>
-              </tr>
-              <tr>
-                <td><div class="team-avatar-sm dark">VV</div></td>
-                <td class="feature-name">Vibes McVibeface</td>
-                <td>VP of Vibes</td>
-                <td class="team-quote">"My job is to make sure the vibes are immaculate. So far, they're at least adequate."</td>
-              </tr>
-              <tr>
-                <td><div class="team-avatar-sm red">SK</div></td>
-                <td class="feature-name">Snake Williams</td>
-                <td>Director of Snake Game Development</td>
-                <td class="team-quote">"I've been perfecting Snake since 1998. The snake is now 47 pixels long."</td>
-              </tr>
-              <tr>
-                <td><div class="team-avatar-sm dark">GR</div></td>
-                <td class="feature-name">Gary</td>
-                <td>Entire Support Department</td>
-                <td class="team-quote">"I answer phones from 2-2:24 PM on selected Tuesdays. Please don't all call at once."</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ========== CART PAGE ========== -->
-      <div class="page" id="page-cart">
-        <div class="page-title-bar">
-          <h2>Your Shopping Cart</h2>
-          <p>Review your questionable purchasing decisions</p>
-        </div>
-        <div class="section-box">
-          <div id="cartContent"></div>
-        </div>
-      </div>
-
-      <!-- ========== CHECKOUT PAGE ========== -->
-      <div class="page" id="page-checkout">
-        <div class="page-title-bar">
-          <h2>Secure Checkout</h2>
-          <p>Almost there! Just hand over your totally real payment info.</p>
-        </div>
-        <form id="checkoutForm">
-          <div class="checkout-split">
-            <div class="checkout-left">
-              <div class="section-box">
-                <h3 class="box-title-bar">Shipping Information</h3>
-                <div class="form-inner">
-                  <div class="form-row-2">
-                    <div class="form-field">
-                      <label for="fullName">Full Name:</label>
-                      <input type="text" id="fullName" placeholder="Shmo McShmoface" required>
-                    </div>
-                    <div class="form-field">
-                      <label for="email">Email:</label>
-                      <input type="email" id="email" placeholder="shmo@shmobile.shmo" required>
-                    </div>
-                  </div>
-                  <div class="form-field">
-                    <label for="address">Address:</label>
-                    <input type="text" id="address" placeholder="1234 Wireless Blvd, Shmoville" required>
-                  </div>
-                  <div class="form-field">
-                    <label for="phone">Phone Number:</label>
-                    <input type="tel" id="phone" placeholder="1-800-SHMOBILE" required>
-                  </div>
+        <!-- HOME PAGE -->
+        <section id="page-home" class="page-content">
+            <!-- Hero Section -->
+            <div class="relative bg-black h-[750px] flex items-center overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <div class="w-full h-full bg-zinc-900 hero-gradient absolute z-10"></div>
+                    <video class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full object-cover opacity-70" autoplay muted loop playsinline>
+                        <source src="images/video.mp4" type="video/mp4">
+                    </video>
                 </div>
-              </div>
-              <div class="section-box">
-                <h3 class="box-title-bar">Payment Details</h3>
-                <p class="form-note">We accept all numbers. Literally any numbers. Go wild.</p>
-                <div class="form-inner">
-                  <div class="form-field">
-                    <label for="cardNumber">Card Number:</label>
-                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
-                  </div>
-                  <div class="form-row-2">
-                    <div class="form-field">
-                      <label for="expiry">Expiry:</label>
-                      <input type="text" id="expiry" placeholder="MM/YY" required>
+
+                <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                    <div class="max-w-2xl">
+                        <h1 class="text-6xl md:text-8xl font-extrabold text-white leading-none tracking-tighter mb-6">
+                            CAN YOU <br><span class="text-v-red">SHMO</span> ME NOW?
+                        </h1>
+                        <p class="text-xl text-zinc-300 mb-8 font-light">
+                            Experience the raw power of the <span class="font-bold text-white">SHMO Network™</span>. Crystal clear calls, competitive Snake streaming, and the reliability of a carrier that literally exists.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <button onclick="showPage('shop')" class="bg-v-red text-white px-10 py-4 font-bold tracking-widest uppercase hover:bg-red-700 transition-all transform hover:-translate-y-1">Shop Phones</button>
+                            <button onclick="showPage('plans')" class="bg-transparent border-2 border-white text-white px-10 py-4 font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all transform hover:-translate-y-1">Explore Plans</button>
+                        </div>
                     </div>
-                    <div class="form-field">
-                      <label for="cvv">CVV:</label>
-                      <input type="text" id="cvv" placeholder="123" required>
-                    </div>
-                  </div>
                 </div>
-              </div>
             </div>
-            <div class="checkout-right">
-              <div class="section-box">
-                <h3 class="box-title-bar">Order Summary</h3>
-                <div id="checkoutSummary"></div>
-              </div>
-              <button type="submit" class="btn-retro btn-red-3d btn-full">CONFIRM ORDER</button>
+
+            <!-- Campaign Gallery -->
+            <div class="py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+                        <div>
+                            <h2 class="text-4xl font-black tracking-tight uppercase">Current Campaigns</h2>
+                            <p class="text-zinc-500 max-w-md">Our award-winning marketing initiatives featuring the boldest red in the industry.</p>
+                        </div>
+                        <a href="#" class="text-v-red font-bold flex items-center gap-2 hover:underline">View All Stories →</a>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="group cursor-pointer">
+                            <div class="overflow-hidden mb-4 bg-zinc-100 aspect-[4/5] rounded-lg">
+                                <img src="images/poster1.jpg" alt="Campaign 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            </div>
+                            <h3 class="font-bold text-lg leading-tight group-hover:text-v-red transition-colors">The SHMO Revolution — Spring 2026</h3>
+                        </div>
+                        <div class="group cursor-pointer">
+                            <div class="overflow-hidden mb-4 bg-zinc-100 aspect-[4/5] rounded-lg">
+                                <img src="images/poster2.jpg" alt="Campaign 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            </div>
+                            <h3 class="font-bold text-lg leading-tight group-hover:text-v-red transition-colors">SHMO Your Way — Lifestyle Collection</h3>
+                        </div>
+                        <div class="group cursor-pointer">
+                            <div class="overflow-hidden mb-4 bg-zinc-100 aspect-[4/5] rounded-lg">
+                                <img src="images/poster3.jpg" alt="Campaign 3" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            </div>
+                            <h3 class="font-bold text-lg leading-tight group-hover:text-v-red transition-colors">Built Different — Innovation at Scale</h3>
+                        </div>
+                        <div class="group cursor-pointer">
+                            <div class="overflow-hidden mb-4 bg-zinc-100 aspect-[4/5] rounded-lg">
+                                <img src="images/poster4.jpg" alt="Campaign 4" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            </div>
+                            <h3 class="font-bold text-lg leading-tight group-hover:text-v-red transition-colors">SHMO Global — Expanding Horizons</h3>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </form>
-      </div>
 
-      <!-- ========== CONFIRMATION PAGE ========== -->
-      <div class="page" id="page-confirmation">
-        <div class="page-title-bar">
-          <h2>Order Confirmed!</h2>
-        </div>
-        <div class="section-box confirmation-box">
-          <div class="confirm-inner">
-            <div class="confirm-check">✓</div>
-            <h3 class="confirm-title">YOUR ORDER HAS BEEN SHMO'D! 🎉</h3>
-            <p class="confirm-order-num" id="orderNumber"></p>
-            <p class="confirm-msg">Your SHMOBILE will arrive via carrier pigeon in <b>3-5 business decades</b>.</p>
-            <p class="confirm-sub">Please ensure your mailbox is pigeon-accessible. We are not responsible for any pigeon-related incidents.</p>
-            <button class="btn-retro btn-red-3d" data-page="home">BACK TO SHOPPING</button>
-          </div>
-        </div>
-      </div>
+            <!-- Features Grid -->
+            <div class="bg-zinc-950 py-24 text-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-v-red font-black text-sm tracking-[0.3em] uppercase mb-4">The SHMOBILE Advantage</h2>
+                        <p class="text-4xl md:text-5xl font-bold tracking-tighter">ENGINEERED FOR THE UNSTOPPABLE.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        <div class="p-8 border border-zinc-800 rounded-2xl hover:border-v-red transition-colors group">
+                            <div class="mb-6 text-v-red bg-v-red/10 w-16 h-16 flex items-center justify-center rounded-xl text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-battery-full"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">7-Day Battery Life</h3>
+                            <p class="text-zinc-400">Our phones last so long, you'll forget what a charger looks like. Seriously, we had to include a reminder app.</p>
+                        </div>
+                        <div class="p-8 border border-zinc-800 rounded-2xl hover:border-v-red transition-colors group">
+                            <div class="mb-6 text-v-red bg-v-red/10 w-16 h-16 flex items-center justify-center rounded-xl text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Indestructible Core</h3>
+                            <p class="text-zinc-400">Drove a tank over it. Dropped it from a heli. It asked for more. Military-grade doesn't even begin to cover it.</p>
+                        </div>
+                        <div class="p-8 border border-zinc-800 rounded-2xl hover:border-v-red transition-colors group">
+                            <div class="mb-6 text-v-red bg-v-red/10 w-16 h-16 flex items-center justify-center rounded-xl text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-gamepad"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Pro-Gaming Ready</h3>
+                            <p class="text-zinc-400">Snake pre-installed with global competitive matchmaking. 47 pixels of pure, unadulterated adrenaline.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Promo Strip -->
+            <div class="relative bg-zinc-100 overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col md:flex-row items-center gap-12">
+                    <div class="w-full md:w-1/2">
+                        <img src="images/banner-girl.png" alt="Promo" class="w-full max-w-md mx-auto rounded-3xl shadow-2xl">
+                    </div>
+                    <div class="w-full md:w-1/2 text-center md:text-left">
+                        <h2 class="text-5xl font-black mb-6 leading-tight uppercase">Switch to SHMOBILE.<br>Earn <span class="text-v-red">$0.50</span>.</h2>
+                        <p class="text-xl text-zinc-600 mb-8">Trade in your old phone (any phone, even a banana) and get fifty whole cents off your first bill. We're serious about your savings.</p>
+                        <button onclick="showPage('plans')" class="bg-black text-white px-10 py-4 font-bold tracking-widest uppercase hover:bg-zinc-800 transition-all">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHOP PAGE -->
+        <section id="page-shop" class="page-content hidden py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-16 border-b border-zinc-200 pb-12">
+                    <h1 class="text-5xl font-black mb-4">SHMO HARDWARE</h1>
+                    <p class="text-xl text-zinc-500">Each device is handpicked by our team of elite SHMOlogists.</p>
+                </div>
+                <div id="shopGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                </div>
+            </div>
+        </section>
+
+        <!-- PLANS PAGE -->
+        <section id="page-plans" class="page-content hidden py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-16">
+                    <h1 class="text-5xl font-black mb-4 uppercase">The Plans</h1>
+                    <p class="text-xl text-zinc-500">Simple pricing. No hidden fees (mostly).</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20" id="plansGrid">
+                </div>
+                <div class="bg-zinc-50 p-10 rounded-3xl border border-zinc-200">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-tower-broadcast text-v-red"></i> Network Details
+                    </h3>
+                    <p class="text-zinc-600 text-sm mb-4">Coverage in at least 3 major cities and that one gas station off Highway 9. Night hours: whenever Gary is asleep. If Gary is awake, service may experience vibes-related interruptions.</p>
+                    <p class="text-zinc-400 text-xs italic">* Plus monthly taxes and SHMO surcharges. $0 activation fee applies because we simply forgot to set up the billing for it.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT PAGE -->
+        <section id="page-about" class="page-content hidden py-24">
+            <div class="max-w-4xl mx-auto px-4">
+                <div class="mb-20 text-center">
+                    <h1 class="text-6xl font-black mb-8 italic">WE NEVER STOP SHMO'ING.</h1>
+                    <p class="text-2xl text-zinc-600 font-light">Founded in 2002 in a garage in Shmoville, SHMOBILE set out to answer one question: "Can you SHMO me now?"</p>
+                </div>
+
+                <div class="prose prose-xl max-w-none mb-24">
+                    <h2 class="text-3xl font-bold mb-6">Our Legacy</h2>
+                    <p class="mb-6 text-zinc-700">Armed with nothing but a dream, three soldering irons, and a suspiciously large supply of red plastic, our founders built the first SHMO prototype—a phone so durable it survived being thrown at a wall during the investor pitch. The investors fled; the phone stayed.</p>
+                    <p class="text-zinc-700">Today, SHMOBILE serves literally dozens of customers across multiple metropolitan areas. Our commitment to providing adequate service at questionable prices remains as strong as our phones.</p>
+                </div>
+
+                <div class="bg-black text-white p-12 rounded-3xl">
+                    <h3 class="text-3xl font-bold mb-12 border-b border-zinc-800 pb-6 uppercase tracking-widest">Executive Team</h3>
+                    <div class="space-y-12">
+                        <div class="flex items-start gap-8">
+                            <div class="w-16 h-16 rounded-full bg-v-red flex-shrink-0 flex items-center justify-center font-black text-xl">SJ</div>
+                            <div>
+                                <h4 class="text-xl font-bold">Shmo Johnson</h4>
+                                <p class="text-v-red font-semibold mb-2 uppercase tracking-wide text-sm">Chief SHMO Officer</p>
+                                <p class="text-zinc-400 italic">"I eat, sleep, and breathe SHMO. Mostly because my office is also my bedroom."</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-8">
+                            <div class="w-16 h-16 rounded-full bg-zinc-800 flex-shrink-0 flex items-center justify-center font-black text-xl">VV</div>
+                            <div>
+                                <h4 class="text-xl font-bold">Vibes McVibeface</h4>
+                                <p class="text-zinc-400 font-semibold mb-2 uppercase tracking-wide text-sm">VP of Vibes</p>
+                                <p class="text-zinc-400 italic">"My job is to make sure the vibes are immaculate. So far, they're at least adequate."</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-8 border-t border-zinc-800 pt-8">
+                            <div class="w-16 h-16 rounded-full bg-zinc-800 flex-shrink-0 flex items-center justify-center font-black text-xl text-zinc-500">GR</div>
+                            <div>
+                                <h4 class="text-xl font-bold text-zinc-500">Gary</h4>
+                                <p class="text-zinc-600 font-semibold mb-2 uppercase tracking-wide text-sm">Entire Support Department</p>
+                                <p class="text-zinc-600 italic">"Gary has Tuesdays off. Please respect Gary's boundaries."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CART SECTION -->
+        <section id="page-cart" class="page-content hidden py-24">
+            <div class="max-w-3xl mx-auto px-4">
+                <h1 class="text-4xl font-black mb-12 uppercase tracking-tighter">Your Cart</h1>
+                <div id="cartContent" class="space-y-6">
+                </div>
+            </div>
+        </section>
+
+        <!-- CONFIRMATION PAGE -->
+        <section id="page-confirmation" class="page-content hidden py-24 text-center">
+            <div class="max-w-xl mx-auto px-4 bg-zinc-50 p-16 rounded-3xl border border-zinc-200 shadow-2xl">
+                <div class="w-20 h-20 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-8 text-4xl shadow-lg">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h1 class="text-4xl font-black mb-4 uppercase">SHMO'D!</h1>
+                <p class="text-zinc-600 mb-8" id="orderNumber"></p>
+                <p class="text-lg font-medium mb-12">Your SHMOBILE will arrive via carrier pigeon in 3-5 business decades. Please ensure your mailbox is pigeon-accessible.</p>
+                <button onclick="showPage('home')" class="bg-black text-white px-10 py-4 font-bold tracking-widest uppercase hover:bg-v-red transition-all">Return Home</button>
+            </div>
+        </section>
     </main>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="site-footer">
-      <div class="footer-cols">
-        <div class="footer-col">
-          <h5>PHONES</h5>
-          <ul>
-            <li><a href="#" data-page="shop">All Phones</a></li>
-            <li><a href="#" data-page="shop">SHMOphones</a></li>
-            <li><a href="#" data-page="shop">Flip Phones</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5>SERVICES</h5>
-          <ul>
-            <li><a href="#">TXT Messaging</a></li>
-            <li><a href="#">Picture Messaging</a></li>
-            <li><a href="#">Snake Game Online</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5>MY ACCOUNT</h5>
-          <ul>
-            <li><a href="#">Pay Bill</a></li>
-            <li><a href="#">Check Minutes</a></li>
-            <li><a href="#">Upgrade Phone</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5>ABOUT US</h5>
-          <ul>
-            <li><a href="#" data-page="about">Our Story</a></li>
-            <li><a href="#">Careers (Not Hiring)</a></li>
-            <li><a href="#">Contact Gary</a></li>
-          </ul>
-        </div>
-      </div>
+    <!-- Footer -->
+    <footer class="bg-black text-white pt-24 pb-12 border-t border-zinc-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
+                <div>
+                    <h5 class="font-black text-xs tracking-widest uppercase mb-6 text-zinc-500">Hardware</h5>
+                    <ul class="space-y-4 text-zinc-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">All Phones</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">The Original SHMO</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">SHMO Fold</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-black text-xs tracking-widest uppercase mb-6 text-zinc-500">Network</h5>
+                    <ul class="space-y-4 text-zinc-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Coverage Map (Low Res)</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Snake Online</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">TXT Messaging</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-black text-xs tracking-widest uppercase mb-6 text-zinc-500">Support</h5>
+                    <ul class="space-y-4 text-zinc-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Email Gary</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Check Minutes</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Warranty (None)</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-black text-xs tracking-widest uppercase mb-6 text-zinc-500">Legal</h5>
+                    <ul class="space-y-4 text-zinc-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of SHMO</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Site Map</a></li>
+                    </ul>
+                </div>
+            </div>
 
-      <div class="footer-bottom">
-        <p class="footer-ie">Best viewed in <b>Internet Explorer 6.0</b> at 1024x768 resolution</p>
-        <p class="footer-copy">© 2002-2026 SHMOBILE WIRELESS. WE NEVER STOP SHMO'ING FOR YOU.</p>
-        <p class="footer-address">SHMOBILE HQ — 1234 Wireless Blvd, Shmoville, USA — 1-800-SHMOBILE</p>
-        <div class="visitor-counter">
-          VISITOR COUNT: <span id="visitorCount">1,254,382</span>
+            <div class="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-zinc-900 gap-8">
+                <div class="flex items-center gap-3">
+                    <img src="images/logo.png" alt="Logo" class="h-8 brightness-0 invert">
+                    <div class="text-2xl font-black tracking-tighter">SHMOBILE<span class="text-v-red italic">/</span></div>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-zinc-600 text-xs mb-2">&copy; 2002-2026 SHMOBILE WIRELESS. WE NEVER STOP SHMO'ING FOR YOU.</p>
+                    <p class="text-zinc-600 text-[10px] uppercase tracking-widest">Visitor Count: <span id="visitorCount">1,254,382</span></p>
+                </div>
+            </div>
         </div>
-      </div>
     </footer>
 
-  </div><!-- end page-container -->
+    <!-- Modern Chat Button -->
+    <div class="fixed bottom-8 right-8 z-[100]">
+        <button id="chatToggle" class="bg-v-red text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform cursor-pointer">
+            <i class="fa-solid fa-comment-dots text-2xl"></i>
+        </button>
 
-  <!-- Bottom Links -->
-  <div class="bottom-links">
-    Home | Site Map | Privacy Policy | Terms & Conditions | Return Policy (No) | Warranty (Also No)
-  </div>
+        <div id="chatWindow" class="hidden absolute bottom-20 right-0 w-80 md:w-96 bg-white border border-zinc-200 shadow-2xl rounded-3xl overflow-hidden flex flex-col">
+            <div class="bg-black text-white p-6 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-v-red rounded-full flex items-center justify-center font-bold">G</div>
+                    <div>
+                        <p class="font-bold leading-none">GaryBot</p>
+                        <p class="text-[10px] text-zinc-400 uppercase tracking-widest mt-1">Status: Tired</p>
+                    </div>
+                </div>
+                <button id="chatClose" class="text-zinc-500 hover:text-white">&#10005;</button>
+            </div>
+            <div id="chatMessages" class="h-80 overflow-y-auto p-6 space-y-4 bg-zinc-50 text-sm">
+                <div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">
+                    Hey. I'm Gary's digital twin. Gary is currently eating a sandwich. How can I help? lol
+                </div>
+            </div>
+            <div class="p-4 border-t border-zinc-100 flex gap-2 bg-white">
+                <input type="text" id="chatInput" placeholder="Message Gary..." class="flex-1 bg-zinc-100 border-none rounded-full px-4 text-sm focus:ring-2 focus:ring-v-red outline-none">
+                <button id="chatSend" class="bg-v-red text-white w-10 h-10 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
-  <!-- Live Chat -->
-  <div class="chat-toggle" id="chatToggle" title="SHMO Live Chat">💬</div>
-  <div class="chat-window" id="chatWindow">
-    <div class="chat-titlebar">
-      <span>SHMO Messenger - Live Chat</span>
-      <div class="chat-titlebar-btns">
-        <span class="titlebar-btn">_</span>
-        <span class="titlebar-btn" id="chatClose">✕</span>
-      </div>
+    <!-- Notifications Toast -->
+    <div id="toast" class="fixed top-24 right-8 z-[100] transform translate-x-full transition-transform duration-300 pointer-events-none">
+        <div class="bg-zinc-900 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-4">
+            <div class="text-v-red font-bold"><i class="fa-solid fa-circle-check"></i></div>
+            <div id="toastMsg" class="font-medium text-sm">Added to cart.</div>
+        </div>
     </div>
-    <div class="chat-toolbar">File &nbsp; Edit &nbsp; View &nbsp; Contacts &nbsp; Help</div>
-    <div class="chat-buddy-bar">
-      <span class="buddy-status">●</span> <b>SHMObot_Gary42</b> — Online
-    </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="chat-msg buddy"><span class="chat-name">SHMObot_Gary42:</span> hey!! welcome 2 SHMOBILE live chat 😎 how can i help u today?? lol</div>
-    </div>
-    <div class="chat-input-area">
-      <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
-      <button class="chat-send-btn" id="chatSend">Send</button>
-    </div>
-    <div class="chat-statusbar">
-      <span class="buddy-status">●</span> SHMObot_Gary42 is typing something amazing...
-    </div>
-  </div>
 
-  <!-- Toast -->
-  <div class="toast" id="toast"></div>
+    <script>
+        const products = [
+            { id: 1, name: "SHMO Prime Elite", price: 199.99, desc: "The flagship. Titanium-shmo casing.", img: "images/poster1.jpg" },
+            { id: 2, name: "SHMO Flip Z", price: 149.99, desc: "Classic flip. Modern vibe.", img: "images/poster2.jpg" },
+            { id: 3, name: "SHMO Brick", price: 89.99, desc: "Literally a brick that makes calls.", img: "images/poster3.jpg" },
+            { id: 4, name: "SHMO Nano", price: 59.99, desc: "Smaller than your thumb. Hard to lose.", img: "images/poster4.jpg" },
+            { id: 5, name: "SHMO Gamer Pro", price: 249.99, desc: "Optimized for Snake High-FPS.", img: "images/poster1.jpg" }
+        ];
 
-  <script src="app.js"></script>
+        const plans = [
+            { name: "SHMO Starter", price: "29.99", minutes: 100, data: "256MB", features: ["1 Snake Match/day", "Gary Email Support"] },
+            { name: "SHMO Pro", price: "49.99", minutes: "Unlimited", data: "1GB", features: ["Unlimited Snake", "Gary Phone Support"] },
+            { name: "SHMO Ultimate", price: "79.99", minutes: "Unlimited", data: "2GB", features: ["Pro Snake League", "Gary Home Visit*"] }
+        ];
+
+        let cart = [];
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
+            document.getElementById(`page-${pageId}`).classList.remove('hidden');
+            window.scrollTo(0, 0);
+
+            if(pageId === 'shop') renderShop();
+            if(pageId === 'plans') renderPlans();
+            if(pageId === 'cart') renderCart();
+        }
+
+        function renderShop() {
+            const grid = document.getElementById('shopGrid');
+            grid.innerHTML = products.map(p => `
+                <div class="group bg-zinc-50 border border-zinc-200 rounded-3xl overflow-hidden hover:shadow-xl transition-all">
+                    <div class="aspect-square bg-zinc-100 overflow-hidden">
+                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-2xl font-bold">${p.name}</h3>
+                            <span class="text-v-red font-black">$${p.price}</span>
+                        </div>
+                        <p class="text-zinc-500 mb-8">${p.desc}</p>
+                        <button onclick="addToCart(${p.id})" class="w-full bg-black text-white py-4 font-bold tracking-widest uppercase hover:bg-v-red transition-colors">Add To Cart</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPlans() {
+            const grid = document.getElementById('plansGrid');
+            grid.innerHTML = plans.map(p => `
+                <div class="p-10 border border-zinc-200 rounded-3xl flex flex-col hover:border-black transition-all">
+                    <h3 class="text-v-red font-black uppercase tracking-[0.2em] mb-4">${p.name}</h3>
+                    <div class="mb-8">
+                        <span class="text-5xl font-black">$${p.price.split('.')[0]}</span>
+                        <span class="text-zinc-400 font-bold">.99/mo</span>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-1">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500 text-xs"></i> <b>${p.minutes}</b> Minutes</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500 text-xs"></i> <b>${p.data}</b> High-Speed Data</li>
+                        ${p.features.map(f => `<li class="flex items-center gap-2 text-zinc-600 font-medium"><i class="fa-solid fa-circle-check text-green-500 text-xs"></i> ${f}</li>`).join('')}
+                    </ul>
+                    <button onclick="showPage('shop')" class="w-full bg-black text-white py-4 font-bold tracking-widest uppercase hover:bg-zinc-800 transition-colors">Choose Plan</button>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            updateCartBadge();
+            showToast(`Added ${product.name} to cart.`);
+        }
+
+        function updateCartBadge() {
+            document.getElementById('cartBadge').innerText = cart.length;
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-x-full');
+            setTimeout(() => toast.classList.add('translate-x-full'), 3000);
+        }
+
+        function renderCart() {
+            const content = document.getElementById('cartContent');
+            if(cart.length === 0) {
+                content.innerHTML = `<div class="text-center py-20 bg-zinc-50 rounded-3xl">
+                    <p class="text-zinc-400 text-xl font-medium mb-8">Your cart is empty. Like my social life.</p>
+                    <button onclick="showPage('shop')" class="bg-black text-white px-10 py-4 font-bold tracking-widest uppercase">Go Shopping</button>
+                </div>`;
+                return;
+            }
+
+            const total = cart.reduce((sum, p) => sum + p.price, 0).toFixed(2);
+            content.innerHTML = `
+                <div class="space-y-4">
+                    ${cart.map((p, i) => `
+                        <div class="flex items-center justify-between p-6 bg-zinc-50 rounded-2xl border border-zinc-100">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 bg-zinc-200 rounded-lg overflow-hidden">
+                                    <img src="${p.img}" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <p class="font-bold text-lg">${p.name}</p>
+                                    <p class="text-v-red font-black">$${p.price}</p>
+                                </div>
+                            </div>
+                            <button onclick="removeFromCart(${i})" class="text-zinc-400 hover:text-red-500 font-bold uppercase text-xs tracking-widest">Remove</button>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="mt-12 p-8 border-t border-zinc-200">
+                    <div class="flex justify-between items-center text-3xl font-black mb-8">
+                        <span>Total</span>
+                        <span>$${total}</span>
+                    </div>
+                    <button onclick="checkout()" class="w-full bg-v-red text-white py-6 font-black tracking-[0.2em] uppercase hover:bg-red-700 transition-colors">Complete Purchase</button>
+                </div>
+            `;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            renderCart();
+            updateCartBadge();
+        }
+
+        function checkout() {
+            const orderNum = 'SHMO-' + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('orderNumber').innerText = `Order ID: ${orderNum}`;
+            cart = [];
+            updateCartBadge();
+            showPage('confirmation');
+        }
+
+        // Chat Logic
+        document.getElementById('chatToggle').onclick = () => document.getElementById('chatWindow').classList.toggle('hidden');
+        document.getElementById('chatClose').onclick = () => document.getElementById('chatWindow').classList.add('hidden');
+
+        function sendChat() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim();
+            if(!msg) return;
+
+            const box = document.getElementById('chatMessages');
+            box.innerHTML += `<div class="bg-black text-white p-3 rounded-2xl rounded-br-none max-w-[80%] self-end ml-auto">${msg}</div>`;
+            input.value = '';
+            box.scrollTop = box.scrollHeight;
+
+            setTimeout(() => {
+                box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">That sounds interesting. I'll pass that to Gary once he finishes his sandwich. Or maybe not. lol</div>`;
+                box.scrollTop = box.scrollHeight;
+            }, 1000);
+        }
+
+        document.getElementById('chatSend').onclick = sendChat;
+        document.getElementById('chatInput').onkeypress = (e) => e.key === 'Enter' && sendChat();
+
+        // Init
+        window.onload = () => {
+            document.getElementById('headerDate').innerText = new Date().toLocaleDateString('en-US', {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+            });
+        };
+    </script>
 </body>
 </html>
