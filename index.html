@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHMOBILE Wireless — Can You SHMO Me Now?</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="images/logo.png">
+</head>
+<body>
+  <!-- Page Container -->
+  <div class="page-container">
+
+    <!-- ===== TOP HEADER ===== -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-logo">
+          <div class="logo-box">
+            <img src="images/logo.png" alt="SHMOBILE" class="logo-img">
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="header-date" id="headerDate">Thursday, April 2, 2026</div>
+          <a href="#" class="header-login">Login to MySHMO</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="main-nav" id="mainNav">
+      <a href="#" class="nav-item active" data-page="home">Home</a>
+      <a href="#" class="nav-item" data-page="shop">Phones</a>
+      <a href="#" class="nav-item" data-page="plans">Plans</a>
+      <a href="#" class="nav-item" data-page="about">About</a>
+      <a href="#" class="nav-item" data-page="cart">Cart (<span id="cartBadge">0</span>)</a>
+    </nav>
+
+    <!-- ===== MARQUEE ===== -->
+    <div class="marquee-bar">
+      <div class="marquee-track" id="marqueeTrack">
+        *** BREAKING: SHMO ICON NOW AVAILABLE FOR FREE WITH ANY PLAN! --- GET UNLIMITED SHMO FOR ONLY $49.99/MO! --- SHMOBILE NETWORK EXPANDING TO 4TH CITY! --- SNAKE GAME LEADERBOARD NOW LIVE! ***
+      </div>
+    </div>
+
+    <!-- ===== PAGES ===== -->
+    <main id="app">
+
+      <!-- ========== HOME PAGE ========== -->
+      <div class="page active" id="page-home">
+
+        <!-- Hero -->
+        <div class="hero-split">
+          <div class="hero-main">
+            <div class="hero-content">
+              <h1 class="hero-title">CAN YOU SHMO ME NOW?</h1>
+              <h2 class="hero-sub">Upgrade to the Newest SHMO Phones!</h2>
+              <p class="hero-text">
+                Experience the power of the <b>SHMO Network™</b>. Crystal clear calls,
+                Snake game streaming, and coverage in at least 3 cities nationwide.
+                Don't get left behind in the SHMO revolution.
+              </p>
+              <div class="hero-links">
+                <a href="#" data-page="plans">&#9654; View Calling Plans</a>
+                <a href="#" data-page="shop">&#9654; Browse All Phones</a>
+                <a href="#" data-page="about">&#9654; About SHMOBILE</a>
+              </div>
+              <button class="btn-retro btn-red-3d" data-page="shop">SHOP NOW!</button>
+            </div>
+          </div>
+          <div class="hero-sidebar">
+            <div class="sidebar-box">
+              <h3 class="sidebar-box-title">SHMOBILE TV</h3>
+              <div class="sidebar-video">
+                <video src="images/video.mp4" autoplay muted loop playsinline></video>
+              </div>
+            </div>
+            <button class="btn-radio" id="radioBtn">📻 SHMO FM 98.7 — Listen Now</button>
+            <div class="radio-player" id="radioPlayer">
+              <img src="images/podcast.png" alt="SHMO FM" class="radio-poster">
+              <audio id="radioAudio" src="images/download.wav" controls></audio>
+            </div>
+          </div>
+        </div>
+
+        <!-- Poster Gallery -->
+        <div class="section-box">
+          <h3 class="box-title-bar">SHMOBILE Campaigns</h3>
+          <div class="poster-grid-retro">
+            <div class="poster-cell">
+              <img src="images/poster1.jpg" alt="Campaign 1">
+              <p class="poster-caption">The SHMO Revolution — Spring 2026</p>
+            </div>
+            <div class="poster-cell">
+              <img src="images/poster2.jpg" alt="Campaign 2">
+              <p class="poster-caption">SHMO Your Way — Lifestyle</p>
+            </div>
+            <div class="poster-cell">
+              <img src="images/poster3.jpg" alt="Campaign 3">
+              <p class="poster-caption">Built Different — Innovation</p>
+            </div>
+            <div class="poster-cell">
+              <img src="images/poster4.jpg" alt="Campaign 4">
+              <p class="poster-caption">SHMO Goes Worldwide</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="quick-links-row">
+          <div class="quick-link-cell">
+            <h4><span class="ql-icon">📱</span> <a href="#" data-page="shop">SHMO Phones</a></h4>
+            <p>Browse our full lineup of indestructible, feature-packed mobile devices!</p>
+          </div>
+          <div class="quick-link-cell">
+            <h4><span class="ql-icon">📡</span> <a href="#" data-page="plans">SHMO Network</a></h4>
+            <p>Coverage in at least 3 major cities and that one gas station off Highway 9.</p>
+          </div>
+          <div class="quick-link-cell">
+            <h4><span class="ql-icon">🐍</span> <a href="#">Snake Game</a></h4>
+            <p>The only game you'll ever need. Now with competitive ranked mode!</p>
+          </div>
+        </div>
+
+        <!-- Featured Phones -->
+        <div class="section-box">
+          <h3 class="box-title-bar">Featured Phones — Handpicked by Our SHMOlogists</h3>
+          <div class="product-table-wrap" id="featuredGrid"></div>
+        </div>
+
+        <!-- Why SHMOBILE -->
+        <div class="section-box">
+          <h3 class="box-title-bar">Why SHMOBILE?</h3>
+          <table class="info-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="feature-name">🔋 7-Day Battery Life</td>
+                <td>Our phones last so long, you'll forget what a charger looks like. Seriously, we had to include a reminder app.</td>
+              </tr>
+              <tr>
+                <td class="feature-name">🛡️ Indestructible Design</td>
+                <td>We drove a truck over it. Then a tank. Then dropped it from a helicopter. It asked for more.</td>
+              </tr>
+              <tr>
+                <td class="feature-name">🐍 Snake Game Pre-installed</td>
+                <td>The only game you'll ever need. Comes with online leaderboards and a competitive ranked mode.</td>
+              </tr>
+              <tr>
+                <td class="feature-name">📡 SHMO Network™</td>
+                <td>Our patented network covers at least 3 major cities and that one gas station off Highway 9.</td>
+              </tr>
+              <tr>
+                <td class="feature-name">🎵 Custom Ringtones</td>
+                <td>Choose from over 4 polyphonic ringtones, including the classic "SHMO Anthem" and "Beep."</td>
+              </tr>
+              <tr>
+                <td class="feature-name">🤝 24/7 Support*</td>
+                <td>*24 minutes, 7 days a year. Our support team, Gary, is doing his best.</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="table-fine-print">* Plus applicable taxes and SHMO surcharges. Support availability may vary. Gary has Tuesdays off.</p>
+        </div>
+
+        <!-- Banner Girl Promo -->
+        <div class="promo-strip">
+          <div class="promo-strip-img">
+            <img src="images/banner-girl.png" alt="Switch to SHMOBILE">
+          </div>
+          <div class="promo-strip-text">
+            <h3>Switch to SHMOBILE Today!</h3>
+            <p>Trade in your old phone (any phone, even a banana) and get <b>$0.50 off</b> your first bill!</p>
+            <button class="btn-retro btn-red-3d" data-page="plans">SEE PLANS</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== SHOP PAGE ========== -->
+      <div class="page" id="page-shop">
+        <div class="page-title-bar">
+          <h2>All SHMO Phones</h2>
+          <p>Find the perfect SHMO for you. Each one is equally questionable.</p>
+        </div>
+        <div class="section-box">
+          <div class="product-table-wrap" id="shopGrid"></div>
+        </div>
+      </div>
+
+      <!-- ========== PLANS PAGE ========== -->
+      <div class="page" id="page-plans">
+        <div class="page-title-bar">
+          <h2>SHMOBILE Calling Plans</h2>
+          <p>Choose your level of commitment to the SHMO lifestyle.</p>
+        </div>
+        <div class="section-box">
+          <table class="info-table plans-table" id="plansTable">
+            <thead>
+              <tr>
+                <th>Plan Name</th>
+                <th>Details</th>
+                <th>Monthly Access</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="plansBody"></tbody>
+          </table>
+          <p class="table-fine-print">* Plus monthly taxes and SHMO surcharges. $0 activation fee applies (we forgot to charge it). Night hours: whenever Gary is asleep.</p>
+        </div>
+
+        <!-- Plan detail cards -->
+        <div class="plans-detail-grid" id="plansGrid"></div>
+      </div>
+
+      <!-- ========== ABOUT PAGE ========== -->
+      <div class="page" id="page-about">
+        <div class="page-title-bar">
+          <h2>About SHMOBILE</h2>
+          <p>The untold story of wireless innovation (mostly untold for legal reasons)</p>
+        </div>
+        <div class="section-box">
+          <h3 class="box-title-bar">Our Story</h3>
+          <div class="about-content">
+            <p>Founded in 2002 in a garage in Shmoville, SHMOBILE set out to answer one question: <em>"Can you SHMO me now?"</em> The answer, as it turned out, was yes.</p>
+            <p>What started as a college project that got wildly out of hand, SHMOBILE quickly grew into the world's most fictional wireless carrier. Armed with nothing but a dream, three soldering irons, and a suspiciously large supply of red plastic, our founders built the first SHMO prototype — a phone so durable, it survived being thrown at a wall during the investor pitch.</p>
+            <p>Today, SHMOBILE serves literally dozens of customers across at least 3 metropolitan areas. Our commitment to providing adequate wireless service at questionable prices remains as strong as our phones (which is very strong — seriously, try breaking one).</p>
+            <h4 class="about-h4">Our Mission</h4>
+            <p>To put a SHMO in every pocket, whether they asked for one or not. We believe that everyone deserves access to a phone that can double as a self-defense weapon, a doorstop, and occasionally, a communication device.</p>
+          </div>
+        </div>
+
+        <div class="section-box">
+          <h3 class="box-title-bar">Meet the Team</h3>
+          <table class="info-table team-table">
+            <thead>
+              <tr>
+                <th style="width:60px;"></th>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Quote</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="team-avatar-sm red">SJ</div></td>
+                <td class="feature-name">Shmo Johnson</td>
+                <td>Chief SHMO Officer</td>
+                <td class="team-quote">"I eat, sleep, and breathe SHMO. Mostly because my office is also my bedroom."</td>
+              </tr>
+              <tr>
+                <td><div class="team-avatar-sm dark">VV</div></td>
+                <td class="feature-name">Vibes McVibeface</td>
+                <td>VP of Vibes</td>
+                <td class="team-quote">"My job is to make sure the vibes are immaculate. So far, they're at least adequate."</td>
+              </tr>
+              <tr>
+                <td><div class="team-avatar-sm red">SK</div></td>
+                <td class="feature-name">Snake Williams</td>
+                <td>Director of Snake Game Development</td>
+                <td class="team-quote">"I've been perfecting Snake since 1998. The snake is now 47 pixels long."</td>
+              </tr>
+              <tr>
+                <td><div class="team-avatar-sm dark">GR</div></td>
+                <td class="feature-name">Gary</td>
+                <td>Entire Support Department</td>
+                <td class="team-quote">"I answer phones from 2-2:24 PM on selected Tuesdays. Please don't all call at once."</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========== CART PAGE ========== -->
+      <div class="page" id="page-cart">
+        <div class="page-title-bar">
+          <h2>Your Shopping Cart</h2>
+          <p>Review your questionable purchasing decisions</p>
+        </div>
+        <div class="section-box">
+          <div id="cartContent"></div>
+        </div>
+      </div>
+
+      <!-- ========== CHECKOUT PAGE ========== -->
+      <div class="page" id="page-checkout">
+        <div class="page-title-bar">
+          <h2>Secure Checkout</h2>
+          <p>Almost there! Just hand over your totally real payment info.</p>
+        </div>
+        <form id="checkoutForm">
+          <div class="checkout-split">
+            <div class="checkout-left">
+              <div class="section-box">
+                <h3 class="box-title-bar">Shipping Information</h3>
+                <div class="form-inner">
+                  <div class="form-row-2">
+                    <div class="form-field">
+                      <label for="fullName">Full Name:</label>
+                      <input type="text" id="fullName" placeholder="Shmo McShmoface" required>
+                    </div>
+                    <div class="form-field">
+                      <label for="email">Email:</label>
+                      <input type="email" id="email" placeholder="shmo@shmobile.shmo" required>
+                    </div>
+                  </div>
+                  <div class="form-field">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" placeholder="1234 Wireless Blvd, Shmoville" required>
+                  </div>
+                  <div class="form-field">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" placeholder="1-800-SHMOBILE" required>
+                  </div>
+                </div>
+              </div>
+              <div class="section-box">
+                <h3 class="box-title-bar">Payment Details</h3>
+                <p class="form-note">We accept all numbers. Literally any numbers. Go wild.</p>
+                <div class="form-inner">
+                  <div class="form-field">
+                    <label for="cardNumber">Card Number:</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                  </div>
+                  <div class="form-row-2">
+                    <div class="form-field">
+                      <label for="expiry">Expiry:</label>
+                      <input type="text" id="expiry" placeholder="MM/YY" required>
+                    </div>
+                    <div class="form-field">
+                      <label for="cvv">CVV:</label>
+                      <input type="text" id="cvv" placeholder="123" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="checkout-right">
+              <div class="section-box">
+                <h3 class="box-title-bar">Order Summary</h3>
+                <div id="checkoutSummary"></div>
+              </div>
+              <button type="submit" class="btn-retro btn-red-3d btn-full">CONFIRM ORDER</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- ========== CONFIRMATION PAGE ========== -->
+      <div class="page" id="page-confirmation">
+        <div class="page-title-bar">
+          <h2>Order Confirmed!</h2>
+        </div>
+        <div class="section-box confirmation-box">
+          <div class="confirm-inner">
+            <div class="confirm-check">✓</div>
+            <h3 class="confirm-title">YOUR ORDER HAS BEEN SHMO'D! 🎉</h3>
+            <p class="confirm-order-num" id="orderNumber"></p>
+            <p class="confirm-msg">Your SHMOBILE will arrive via carrier pigeon in <b>3-5 business decades</b>.</p>
+            <p class="confirm-sub">Please ensure your mailbox is pigeon-accessible. We are not responsible for any pigeon-related incidents.</p>
+            <button class="btn-retro btn-red-3d" data-page="home">BACK TO SHOPPING</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>PHONES</h5>
+          <ul>
+            <li><a href="#" data-page="shop">All Phones</a></li>
+            <li><a href="#" data-page="shop">SHMOphones</a></li>
+            <li><a href="#" data-page="shop">Flip Phones</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>SERVICES</h5>
+          <ul>
+            <li><a href="#">TXT Messaging</a></li>
+            <li><a href="#">Picture Messaging</a></li>
+            <li><a href="#">Snake Game Online</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>MY ACCOUNT</h5>
+          <ul>
+            <li><a href="#">Pay Bill</a></li>
+            <li><a href="#">Check Minutes</a></li>
+            <li><a href="#">Upgrade Phone</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>ABOUT US</h5>
+          <ul>
+            <li><a href="#" data-page="about">Our Story</a></li>
+            <li><a href="#">Careers (Not Hiring)</a></li>
+            <li><a href="#">Contact Gary</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-ie">Best viewed in <b>Internet Explorer 6.0</b> at 1024x768 resolution</p>
+        <p class="footer-copy">© 2002-2026 SHMOBILE WIRELESS. WE NEVER STOP SHMO'ING FOR YOU.</p>
+        <p class="footer-address">SHMOBILE HQ — 1234 Wireless Blvd, Shmoville, USA — 1-800-SHMOBILE</p>
+        <div class="visitor-counter">
+          VISITOR COUNT: <span id="visitorCount">1,254,382</span>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- end page-container -->
+
+  <!-- Bottom Links -->
+  <div class="bottom-links">
+    Home | Site Map | Privacy Policy | Terms & Conditions | Return Policy (No) | Warranty (Also No)
+  </div>
+
+  <!-- Live Chat -->
+  <div class="chat-toggle" id="chatToggle" title="SHMO Live Chat">💬</div>
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-titlebar">
+      <span>SHMO Messenger - Live Chat</span>
+      <div class="chat-titlebar-btns">
+        <span class="titlebar-btn">_</span>
+        <span class="titlebar-btn" id="chatClose">✕</span>
+      </div>
+    </div>
+    <div class="chat-toolbar">File &nbsp; Edit &nbsp; View &nbsp; Contacts &nbsp; Help</div>
+    <div class="chat-buddy-bar">
+      <span class="buddy-status">●</span> <b>SHMObot_Gary42</b> — Online
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg buddy"><span class="chat-name">SHMObot_Gary42:</span> hey!! welcome 2 SHMOBILE live chat 😎 how can i help u today?? lol</div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off">
+      <button class="chat-send-btn" id="chatSend">Send</button>
+    </div>
+    <div class="chat-statusbar">
+      <span class="buddy-status">●</span> SHMObot_Gary42 is typing something amazing...
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
