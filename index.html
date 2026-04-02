@@ -938,6 +938,84 @@
                         box.scrollTop = box.scrollHeight;
                     }, 6000);
                 }
+
+                // Random meme moments
+                if (Math.random() > 0.55) {
+                    setTimeout(() => {
+                        const memes = [
+                            {
+                                text: "This is literally me every Monday at SHMOBILE HQ 👇 I walk in, the servers are down, the coffee machine is broken, and someone put decaf in the regular pot. DECAF. That's a war crime. ☕💀",
+                                img: "https://media.giphy.com/media/l1J9u3TZfpmeDLkD6/giphy.gif",
+                                caption: "Me pretending everything is fine while the office is on fire 🔥"
+                            },
+                            {
+                                text: "When a customer calls and says 'I've tried nothing and I'm all out of ideas' 👇",
+                                img: "https://media.giphy.com/media/3o7TKwmnDgQb5jemjK/giphy.gif",
+                                caption: "Gary's face when he answers the support line 😐"
+                            },
+                            {
+                                text: "POV: You just told Gary the IShmob 17 is sold out and there's 47 people in line 👇",
+                                img: "https://media.giphy.com/media/32mC2kProMGLC/giphy.gif",
+                                caption: "I'm fine. This is fine. Everything is fine. 🫠"
+                            },
+                            {
+                                text: "My boss when I ask for a day off after working 347 days straight 👇",
+                                img: "https://media.giphy.com/media/fXnRObM8Q0RkOmR5nf/giphy.gif",
+                                caption: "He laughed for 45 minutes. Then said no. Then laughed some more. 😂😭"
+                            },
+                            {
+                                text: "Me explaining to a customer that they can't charge their IShmob in the microwave 👇",
+                                img: "https://media.giphy.com/media/DHqth0hVQoIzS/giphy.gif",
+                                caption: "It happened TWICE this week. TWICE. 🤦"
+                            },
+                            {
+                                text: "When someone walks into the store 5 minutes before closing 👇",
+                                img: "https://media.giphy.com/media/l4FGuhL4U2WSOlKPm/giphy.gif",
+                                caption: "I can feel my soul leaving my body in real time 👻"
+                            },
+                            {
+                                text: "The intern when I told him the wifi password is 'SHMOBILE123' and he typed it in lowercase 👇",
+                                img: "https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif",
+                                caption: "He's been trying for 3 hours. I don't have the heart to tell him. 😅"
+                            },
+                            {
+                                text: "How I feel after explaining the 2yr contract for the 900th time today 👇",
+                                img: "https://media.giphy.com/media/xT5LMHxhOfscxPfIfm/giphy.gif",
+                                caption: "Yes it's FREE. No there's no catch. Ok fine there's a TINY catch. It's 2 years. That's it. PLEASE. 🙏"
+                            }
+                        ];
+                        const meme = memes[Math.floor(Math.random() * memes.length)];
+                        box.innerHTML += `
+                            <div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm">
+                                <p class="text-xs text-zinc-600 mb-2">${meme.text}</p>
+                                <img src="${meme.img}" class="w-full rounded-xl" style="max-height:180px; object-fit:cover;">
+                                <p class="text-[10px] text-zinc-400 mt-1">${meme.caption}</p>
+                            </div>`;
+                        box.scrollTop = box.scrollHeight;
+                    }, 8000);
+                }
+
+                // Random office drama
+                if (Math.random() > 0.7) {
+                    setTimeout(() => {
+                        const drama = [
+                            "🚨 BREAKING NEWS 🚨 Someone just stole Gary's lunch from the fridge AGAIN. It was a turkey sandwich with extra pickles. I had my NAME on it. Written in SHARPIE. This is the third time this month. I'm setting up a hidden camera. Justice will be served. 🕵️",
+                            "UPDATE: The office plant Fernanda is doing amazing. She grew a new leaf today. I cried a little. She's the only coworker who doesn't steal my lunch or ask me to fix their phone. I love you Fernanda. 🌿💚",
+                            "Fun fact: I've been employee of the month for 24 months straight. Not because I'm good at my job. Because I'm the ONLY employee. The plaque just has my face on it permanently now. It's getting weird. 🏆",
+                            "Just overheard the boss on a call saying 'we need to expand the team.' I got SO excited. Then he said 'by getting Gary to work weekends too.' I'm going to go scream into a pillow now. 😊🔥",
+                            "The vending machine just ate my dollar for the FIFTH time today. I've named it 'The Thief.' We have a complicated relationship. I keep giving it money, it keeps giving me nothing. Kinda like my last relationship tbh 💔🤖",
+                            "Someone left a sticky note on my desk that says 'You're doing great!' I don't know who wrote it but I'm not crying YOU'RE crying. It's allergies. The office has allergies. 😢✨",
+                            "URGENT MEMO FROM GARY: If anyone sees a pigeon in the break room, that's Gerald. He's not a pest, he's our backup courier from 2019. He refuses to leave. We've bonded. Please don't scare him. 🐦❤️"
+                        ];
+                        const d = drama[Math.floor(Math.random() * drama.length)];
+                        box.innerHTML += `
+                            <div class="bg-yellow-50 p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-yellow-200 shadow-sm">
+                                <p class="text-xs font-bold text-yellow-800 mb-1">📢 Gary's Office Update</p>
+                                <p class="text-xs text-zinc-700">${d}</p>
+                            </div>`;
+                        box.scrollTop = box.scrollHeight;
+                    }, 10000);
+                }
             }, 1200);
         }
 
