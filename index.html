@@ -942,10 +942,11 @@
                 return;
             }
 
-            // Typing indicator
+            // Typing indicator with realistic delay
             box.innerHTML += `<div id="typing" class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%] text-zinc-400 italic">Gary is typing...</div>`;
             box.scrollTop = box.scrollHeight;
 
+            const mainDelay = 1500 + Math.floor(Math.random() * 2000); // 1.5-3.5s
             setTimeout(() => {
                 const typing = document.getElementById('typing');
                 if (typing) typing.remove();
@@ -953,8 +954,10 @@
                 box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">${response}</div>`;
                 box.scrollTop = box.scrollHeight;
 
-                // Pick ONE random extra thing per message
+                // Pick ONE random extra thing per message - same style as Gary's messages
                 const n = userName || 'friend';
+                const delay = 2500 + Math.floor(Math.random() * 3000); // 2.5-5.5s random delay
+
                 const extras = [
                     // Phone suggestion
                     () => { const phones = [
@@ -964,51 +967,61 @@
                         { img: "images/mobile3.png", name: "IShmob 15", price: "$19.99", line: `Still going strong ${n}! Like me after 3 energy drinks. Which is right now btw. ⚡` },
                         { img: "images/mobile4.png", name: "IShmob Gamer", price: "$14.99", line: `Small but mighty ${n}. Like a chihuahua. But it makes calls instead of barking. 🐕` }
                     ]; const p = phones[Math.floor(Math.random() * phones.length)];
-                    setTimeout(() => { box.innerHTML += `<div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm"><p class="text-xs text-zinc-400 mb-2">Gary's Pick 🔥</p><div class="flex items-center gap-3 mb-2"><img src="${p.img}" class="w-14 h-14 object-contain rounded-lg bg-zinc-50 p-1"><div><p class="font-bold text-sm">${p.name}</p><p class="text-v-red font-black text-xs">${p.price}</p></div></div><p class="text-xs text-zinc-600">${p.line}</p></div>`; box.scrollTop = box.scrollHeight; }, 3000); },
+                    showTypingThen(() => { box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">${p.line}<br><br><img src="${p.img}" style="width:60px; height:60px; object-fit:contain; display:inline-block; vertical-align:middle; background:#f4f4f5; border-radius:8px; padding:4px; margin-right:8px;"><b>${p.name}</b> — <span style="color:#ed1c24; font-weight:800;">${p.price}</span></div>`; box.scrollTop = box.scrollHeight; }, delay); },
                     // Coworker gossip
                     () => { const coworkers = [
-                        { img: "images/face1.jpg", gossip: `Yo ${n} you see this guy? 👇 That's Dave from support. Poor dude got fired today for NO reason. Management said he was 'too relaxed.' BRO WAS JUST BREATHING. RIP Dave 😭`, caption: "Gone but not forgotten. Pour one out for Dave. 🫡" },
-                        { img: "images/face3.jpg", gossip: `${n} omg look at this 👇 That's Karen from accounting. She got caught printing 400 pages of cat memes. She said it was 'team morale.' She's now BANNED from the printer room. 🐱🖨️`, caption: "Karen's cat meme collection was actually pretty good tho ngl 😂" },
-                        { img: "images/face4.jpg", gossip: `Yo ${n} check this man out 👇 That's Steve from marketing. He accidentally sent a company-wide email saying 'I hate Mondays' but he sent it on a TUESDAY. HR meeting: 6 hours and counting. 📧😬`, caption: "Update: Steve is still in the meeting. We're sending snacks. 🍕" },
-                        { img: "images/face5.jpg", gossip: `${n}! This is Lisa 👇 She was the intern. WAS. Got promoted to VP in 3 weeks because nobody else applied. First decision: Friday pizza day. Best VP ever. 🍕👑`, caption: "Lisa for president honestly 🗳️" },
-                        { img: "images/face2.jpg", gossip: `${n} look at this legend 👇 That's Mike. He's been 'on break' for 3 days. Nobody noticed because he put a cardboard cutout at his desk. It's been answering emails. We're impressed AND concerned. 📦🤔`, caption: "The cardboard cutout got employee of the month. Not even joking. 🏆" },
-                        { img: "images/support.jpg", gossip: `${n} remember Dave? 👇 UPDATE: He showed up today in a disguise. Fake mustache and sunglasses. Tried to apply for his own job. HR recognized him in 4 seconds. He said 'worth a shot.' Legend. 🥸`, caption: "Dave never gives up. We don't deserve Dave. 😭🫡" }
+                        { img: "images/face1.jpg", text: `Yo ${n} you see this guy? That's Dave from support. Poor dude got fired today for NO reason. Management said he was 'too relaxed.' BRO WAS JUST BREATHING. RIP Dave 😭` },
+                        { img: "images/face3.jpg", text: `${n} omg look at this. That's Karen from accounting. She got caught printing 400 pages of cat memes. She said it was 'team morale.' She's now BANNED from the printer room. 🐱🖨️` },
+                        { img: "images/face4.jpg", text: `Yo ${n} check this man out. That's Steve from marketing. He accidentally sent a company-wide email saying 'I hate Mondays' but he sent it on a TUESDAY. HR meeting: 6 hours and counting. 📧😬` },
+                        { img: "images/face5.jpg", text: `${n}! This is Lisa. She was the intern. WAS. Got promoted to VP in 3 weeks because nobody else applied. First decision: Friday pizza day. Best VP ever. 🍕👑` },
+                        { img: "images/face2.jpg", text: `${n} look at this legend. That's Mike. He's been 'on break' for 3 days. Nobody noticed because he put a cardboard cutout at his desk. It's been answering emails. 📦🤔` },
+                        { img: "images/support.jpg", text: `${n} remember Dave? UPDATE: He showed up today in a disguise. Fake mustache and sunglasses. Tried to apply for his own job. HR recognized him in 4 seconds. He said 'worth a shot.' Legend. 🥸` }
                     ]; const c = coworkers[Math.floor(Math.random() * coworkers.length)];
-                    setTimeout(() => { box.innerHTML += `<div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm"><p class="text-xs text-zinc-600 mb-2">${c.gossip}</p><img src="${c.img}" class="w-full rounded-xl border border-zinc-100" style="max-height:180px; object-fit:cover;"><p class="text-[10px] text-zinc-400 mt-1">${c.caption}</p></div>`; box.scrollTop = box.scrollHeight; }, 3000); },
+                    showTypingThen(() => { box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">${c.text}<br><img src="${c.img}" style="width:100%; border-radius:12px; margin-top:8px; max-height:180px; object-fit:cover;"></div>`; box.scrollTop = box.scrollHeight; }, delay); },
                     // Broken phone
                     () => { const bp = [
-                        { img: "images/dead-phone.jpg", rant: `${n} BRO look at this 👇 Customer walked in with THIS and said 'it just stopped working.' SIR. WHAT DID YOU DO?? 😭` },
-                        { img: "images/broken1.jpg", rant: `${n} I can't even... 👇 Someone brought this in and asked for a SCREEN PROTECTOR. Bro there's no screen LEFT to protect. 🏚️` },
-                        { img: "images/broken2.jpg", rant: `Ok ${n} you need to see this 👇 Customer said 'my phone got a little wet.' A LITTLE WET?? I can hear the ocean when I hold it to my ear. 🌊🐠` },
-                        { img: "images/broken3.jpg", rant: `${n} check this disaster 👇 Lady goes 'I dropped it from the couch.' THE COUCH?? Ma'am do you live on the 47th floor?? 🛋️🏔️` },
-                        { img: "images/broken4.jpg", rant: `${n} I need therapy after this one 👇 Kid says 'my dog ate it.' YOUR DOG ATE—?? What kind of dog do you HAVE?? A T-REX?? 🦖📱` }
+                        { img: "images/dead-phone.jpg", text: `${n} BRO look at this. Customer walked in with THIS and said 'it just stopped working.' SIR. WHAT DID YOU DO?? 😭 Use code GARY10 for 10% off btw 🤫` },
+                        { img: "images/broken1.jpg", text: `${n} I can't even... Someone brought this in and asked for a SCREEN PROTECTOR. Bro there's no screen LEFT to protect. 🏚️` },
+                        { img: "images/broken2.jpg", text: `Ok ${n} you need to see this. Customer said 'my phone got a little wet.' A LITTLE WET?? I can hear the ocean when I hold it to my ear. 🌊🐠` },
+                        { img: "images/broken3.jpg", text: `${n} check this disaster. Lady goes 'I dropped it from the couch.' THE COUCH?? Ma'am do you live on the 47th floor?? 🛋️🏔️` },
+                        { img: "images/broken4.jpg", text: `${n} I need therapy after this one. Kid says 'my dog ate it.' YOUR DOG ATE—?? What kind of dog do you HAVE?? A T-REX?? 🦖📱` }
                     ]; const b = bp[Math.floor(Math.random() * bp.length)];
-                    setTimeout(() => { box.innerHTML += `<div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm"><p class="text-xs text-zinc-600 mb-2">${b.rant}</p><img src="${b.img}" class="w-full rounded-xl border border-zinc-100" style="max-height:180px; object-fit:cover;"><p class="text-xs text-zinc-600 mt-2">But hey ${n}, you seem cool 😎 Use code <b class="text-v-red">GARY10</b> for 10% off any IShmob. Don't tell my boss. 🤫</p></div>`; box.scrollTop = box.scrollHeight; }, 3000); },
+                    showTypingThen(() => { box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">${b.text}<br><img src="${b.img}" style="width:100%; border-radius:12px; margin-top:8px; max-height:180px; object-fit:cover;"></div>`; box.scrollTop = box.scrollHeight; }, delay); },
                     // Meme GIF
                     () => { const memes = [
-                        { text: `${n}, this is literally me every Monday at SHMOBILE HQ 👇`, img: "https://media.giphy.com/media/l1J9u3TZfpmeDLkD6/giphy.gif", caption: "Me pretending everything is fine while the office is on fire 🔥" },
-                        { text: `When a customer calls and says 'I've tried nothing and I'm all out of ideas' 👇`, img: "https://media.giphy.com/media/3o7TKwmnDgQb5jemjK/giphy.gif", caption: "Gary's face when he answers the support line 😐" },
-                        { text: `POV: You just told Gary the IShmob 17 is sold out ${n} 👇`, img: "https://media.giphy.com/media/32mC2kProMGLC/giphy.gif", caption: "I'm fine. This is fine. Everything is fine. 🫠" },
-                        { text: `My boss when I ask for a day off ${n} 👇`, img: "https://media.giphy.com/media/fXnRObM8Q0RkOmR5nf/giphy.gif", caption: "He laughed for 45 minutes. Then said no. 😂😭" },
-                        { text: `Me explaining to a customer they can't charge their IShmob in the microwave ${n} 👇`, img: "https://media.giphy.com/media/DHqth0hVQoIzS/giphy.gif", caption: "It happened TWICE this week. TWICE. 🤦" },
-                        { text: `When someone walks in 5 minutes before closing ${n} 👇`, img: "https://media.giphy.com/media/l4FGuhL4U2WSOlKPm/giphy.gif", caption: "I can feel my soul leaving my body 👻" }
-                    ]; const m = memes[Math.floor(Math.random() * memes.length)];
-                    setTimeout(() => { box.innerHTML += `<div class="bg-white p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-zinc-200 shadow-sm"><p class="text-xs text-zinc-600 mb-2">${m.text}</p><img src="${m.img}" class="w-full rounded-xl" style="max-height:180px; object-fit:cover;"><p class="text-[10px] text-zinc-400 mt-1">${m.caption}</p></div>`; box.scrollTop = box.scrollHeight; }, 3000); },
+                        { text: `${n}, this is literally me every Monday at SHMOBILE HQ`, img: "https://media.giphy.com/media/l1J9u3TZfpmeDLkD6/giphy.gif" },
+                        { text: `When a customer calls and says 'I've tried nothing and I'm all out of ideas'`, img: "https://media.giphy.com/media/3o7TKwmnDgQb5jemjK/giphy.gif" },
+                        { text: `POV: You just told Gary the IShmob 17 is sold out ${n}`, img: "https://media.giphy.com/media/32mC2kProMGLC/giphy.gif" },
+                        { text: `My boss when I ask for a day off ${n}`, img: "https://media.giphy.com/media/fXnRObM8Q0RkOmR5nf/giphy.gif" },
+                        { text: `Me explaining to a customer they can't charge their IShmob in the microwave ${n}`, img: "https://media.giphy.com/media/DHqth0hVQoIzS/giphy.gif" },
+                        { text: `When someone walks in 5 minutes before closing ${n}`, img: "https://media.giphy.com/media/l4FGuhL4U2WSOlKPm/giphy.gif" }
+                    ]; const me = memes[Math.floor(Math.random() * memes.length)];
+                    showTypingThen(() => { box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">${me.text}<br><img src="${me.img}" style="width:100%; border-radius:12px; margin-top:8px; max-height:180px; object-fit:cover;"></div>`; box.scrollTop = box.scrollHeight; }, delay); },
                     // Office drama
                     () => { const drama = [
                         `🚨 BREAKING ${n} 🚨 Someone just stole Gary's lunch AGAIN. Turkey sandwich with extra pickles. My NAME was on it. In SHARPIE. I'm setting up a hidden camera. 🕵️`,
                         `${n}! UPDATE: The office plant Fernanda grew a new leaf today. I cried. She's the only coworker who doesn't steal my lunch. I love you Fernanda. 🌿💚`,
-                        `Fun fact ${n}: I've been employee of the month 24 months straight. Not because I'm good. Because I'm the ONLY employee. The plaque just has my face permanently now. 🏆`,
+                        `Fun fact ${n}: I've been employee of the month 24 months straight. Not because I'm good. Because I'm the ONLY employee. 🏆`,
                         `${n}!! Just overheard the boss say 'we need to expand the team.' Then he said 'by getting Gary to work weekends too.' I'm screaming into a pillow now. 😊🔥`,
                         `${n}, the vending machine ate my dollar for the FIFTH time today. I've named it 'The Thief.' Kinda like my last relationship tbh 💔🤖`,
                         `URGENT MEMO ${n}: If you see a pigeon in the break room, that's Gerald. He's our backup courier from 2019. He refuses to leave. We've bonded. 🐦❤️`
                     ]; const d = drama[Math.floor(Math.random() * drama.length)];
-                    setTimeout(() => { box.innerHTML += `<div class="bg-yellow-50 p-3 rounded-2xl rounded-bl-none max-w-[85%] border border-yellow-200 shadow-sm"><p class="text-xs font-bold text-yellow-800 mb-1">📢 Gary's Office Update</p><p class="text-xs text-zinc-700">${d}</p></div>`; box.scrollTop = box.scrollHeight; }, 3000); },
+                    showTypingThen(() => { box.innerHTML += `<div class="bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%]">${d}</div>`; box.scrollTop = box.scrollHeight; }, delay); },
                     // Nothing extra
                     () => {}
                 ];
                 extras[Math.floor(Math.random() * extras.length)]();
-            }, 1200);
+            }, 1500 + Math.floor(Math.random() * 1500));
+        }
+
+        function showTypingThen(callback, delay) {
+            const box = document.getElementById('chatMessages');
+            const t = document.createElement('div');
+            t.className = 'bg-zinc-200 p-3 rounded-2xl rounded-bl-none max-w-[80%] text-zinc-400 italic';
+            t.textContent = 'Gary is typing...';
+            box.appendChild(t);
+            box.scrollTop = box.scrollHeight;
+            setTimeout(() => { t.remove(); callback(); }, delay);
         }
 
         // Chat send handled by form submit
