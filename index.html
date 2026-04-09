@@ -187,18 +187,16 @@
                     <source src="images/shmobile-gamer.mp4" type="video/mp4">
                 </video>
                 <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"></div>
+                <button id="gamerPlayBtn" onclick="toggleGamerAudio()" class="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-white/15 backdrop-blur-md border-2 border-white/30 flex items-center justify-center hover:bg-white/25 hover:scale-110 transition-all fade-in-2">
+                    <i id="gamerPlayIcon" class="fa-solid fa-play text-white text-3xl ml-1"></i>
+                </button>
                 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                     <div class="max-w-xl">
                         <h2 class="text-v-red font-black text-sm tracking-[0.3em] uppercase mb-4">New Arrival</h2>
                         <h3 class="text-5xl md:text-7xl font-black text-white leading-none tracking-tighter mb-4">ISHMOB<br>GAMER</h3>
                         <p class="text-2xl text-zinc-300 font-light mb-2">Built for champions. Play anywhere.</p>
                         <p class="text-4xl font-black mb-8" style="color:#ed1c24">$14.99</p>
-                        <div class="flex items-center gap-4">
-                            <button onclick="addToCart(4)" class="bg-v-red text-white px-12 py-5 font-black tracking-[0.2em] uppercase text-lg hover:bg-red-700 transition-all transform hover:-translate-y-1 hover:shadow-2xl">Order Now</button>
-                            <button id="gamerPlayBtn" onclick="toggleGamerAudio()" class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/40 flex items-center justify-center hover:bg-white/30 hover:scale-110 transition-all">
-                                <i id="gamerPlayIcon" class="fa-solid fa-play text-white text-xl ml-1"></i>
-                            </button>
-                        </div>
+                        <button onclick="addToCart(4)" class="bg-v-red text-white px-12 py-5 font-black tracking-[0.2em] uppercase text-lg hover:bg-red-700 transition-all transform hover:-translate-y-1 hover:shadow-2xl mb-6">Order Now</button>
                         <audio id="gamerAudio" src="images/gamer.m4a"></audio>
                     </div>
                 </div>
