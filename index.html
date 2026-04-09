@@ -621,7 +621,7 @@
     </footer>
 
     <!-- Purchase Notification -->
-    <div id="purchaseNotif" class="fixed bottom-24 left-6 z-[90] transform -translate-x-full transition-transform duration-500" style="max-width:320px">
+    <div id="purchaseNotif" class="fixed bottom-24 left-6 z-[90] transition-transform duration-500" style="max-width:320px; transform:translateX(calc(-100% - 24px))">
         <div class="bg-white rounded-2xl shadow-2xl border border-zinc-200 p-4 flex items-center gap-3">
             <img id="notifImg" src="" class="w-12 h-12 object-contain rounded-lg bg-zinc-50 p-1">
             <div class="flex-1 min-w-0">
@@ -958,7 +958,7 @@
             document.getElementById('notifTime').textContent = t;
             const el = document.getElementById('purchaseNotif');
             el.style.transform = 'translateX(0)';
-            setTimeout(() => { el.style.transform = 'translateX(-120%)'; }, 4000);
+            setTimeout(() => { el.style.transform = 'translateX(calc(-100% - 24px))'; }, 4000);
         }
         setTimeout(() => { showPurchaseNotif(); setInterval(showPurchaseNotif, 8000 + Math.floor(Math.random()*7000)); }, 5000);
 
