@@ -620,18 +620,6 @@
         </div>
     </footer>
 
-    <!-- Purchase Notification -->
-    <div id="purchaseNotif" class="fixed bottom-24 left-6 z-[90] transition-transform duration-500" style="max-width:320px; transform:translateX(calc(-100% - 24px))">
-        <div class="bg-white rounded-2xl shadow-2xl border border-zinc-200 p-4 flex items-center gap-3">
-            <img id="notifImg" src="" class="w-12 h-12 object-contain rounded-lg bg-zinc-50 p-1">
-            <div class="flex-1 min-w-0">
-                <p id="notifText" class="text-sm font-bold truncate"></p>
-                <p id="notifTime" class="text-xs text-zinc-400"></p>
-            </div>
-            <div class="text-green-500 text-xs font-bold">VERIFIED ✓</div>
-        </div>
-    </div>
-
     <!-- Add to Cart Popup -->
     <div id="cartPopup" class="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm" style="display:none">
         <div class="bg-white rounded-3xl p-10 max-w-md w-[90%] text-center shadow-2xl">
@@ -933,34 +921,6 @@
             updateCartBadge();
             showPage('confirmation');
         }
-
-        // Fake purchase notifications
-        const fakeNames = ['Sarah M.','Jake T.','Emily R.','Carlos G.','Aisha K.','Dave W.','Lisa P.','Omar H.','Mia L.','Tyler B.','Jessica N.','Raj S.','Hannah F.','Chris D.','Sophia A.','Marcus J.','Olivia V.','Liam C.','Zoe Q.','Nathan E.'];
-        const fakeCities = ['New York','Los Angeles','Chicago','Houston','Miami','Seattle','Denver','Atlanta','Boston','Portland','Austin','San Diego','Detroit','Phoenix','Dallas','Orlando','Nashville','Charlotte','Minneapolis','Philadelphia'];
-        const fakePhones = [
-            {name:'IShmob 17',img:'images/new-phone.png'},
-            {name:'IShmob 16 Pro',img:'images/mobile2.png'},
-            {name:'IShmob 15',img:'images/mobile3.png'},
-            {name:'IShmob Gamer',img:'images/mobile4.png'},
-            {name:'IShmob Classic',img:'images/mobile1.png'},
-            {name:'Shmoberry',img:'images/shmoberry.png'},
-            {name:'IShmob 17 Ultra',img:'images/new-phone.png'}
-        ];
-        const fakeTimes = ['Just now','2 min ago','5 min ago','8 min ago','12 min ago','15 min ago','20 min ago','1 min ago','3 min ago','30 sec ago'];
-
-        function showPurchaseNotif() {
-            const n = fakeNames[Math.floor(Math.random()*fakeNames.length)];
-            const c = fakeCities[Math.floor(Math.random()*fakeCities.length)];
-            const p = fakePhones[Math.floor(Math.random()*fakePhones.length)];
-            const t = fakeTimes[Math.floor(Math.random()*fakeTimes.length)];
-            document.getElementById('notifImg').src = p.img;
-            document.getElementById('notifText').textContent = `${n} in ${c} bought ${p.name}`;
-            document.getElementById('notifTime').textContent = t;
-            const el = document.getElementById('purchaseNotif');
-            el.style.transform = 'translateX(0)';
-            setTimeout(() => { el.style.transform = 'translateX(calc(-100% - 24px))'; }, 4000);
-        }
-        setTimeout(() => { showPurchaseNotif(); setInterval(showPurchaseNotif, 8000 + Math.floor(Math.random()*7000)); }, 5000);
 
         // Gamer audio toggle
         function toggleGamerAudio() {
@@ -1288,7 +1248,17 @@
             document.getElementById('headerDate').innerText = new Date().toLocaleDateString('en-US', {
                 weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
             });
+            // Force autoplay on mobile
+            document.querySelectorAll('video[autoplay]').forEach(v => {
+                v.play().catch(() => {});
+            });
         };
+        // Also try on first touch for iOS
+        document.addEventListener('touchstart', function() {
+            document.querySelectorAll('video[autoplay]').forEach(v => {
+                if (v.paused) v.play().catch(() => {});
+            });
+        }, { once: true });
     </script>
 </body>
 </html>
