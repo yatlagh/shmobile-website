@@ -193,7 +193,13 @@
                         <h3 class="text-5xl md:text-7xl font-black text-white leading-none tracking-tighter mb-4">ISHMOB<br>GAMER</h3>
                         <p class="text-2xl text-zinc-300 font-light mb-2">Built for champions. Play anywhere.</p>
                         <p class="text-4xl font-black mb-8" style="color:#ed1c24">$14.99</p>
-                        <button onclick="addToCart(4)" class="bg-v-red text-white px-12 py-5 font-black tracking-[0.2em] uppercase text-lg hover:bg-red-700 transition-all transform hover:-translate-y-1 hover:shadow-2xl">Order Now</button>
+                        <div class="flex items-center gap-4">
+                            <button onclick="addToCart(4)" class="bg-v-red text-white px-12 py-5 font-black tracking-[0.2em] uppercase text-lg hover:bg-red-700 transition-all transform hover:-translate-y-1 hover:shadow-2xl">Order Now</button>
+                            <button id="gamerPlayBtn" onclick="toggleGamerAudio()" class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/40 flex items-center justify-center hover:bg-white/30 hover:scale-110 transition-all">
+                                <i id="gamerPlayIcon" class="fa-solid fa-play text-white text-xl ml-1"></i>
+                            </button>
+                        </div>
+                        <audio id="gamerAudio" src="images/gamer.m4a"></audio>
                     </div>
                 </div>
             </div>
@@ -912,6 +918,30 @@
             updateCartBadge();
             showPage('confirmation');
         }
+
+        // Gamer audio toggle
+        function toggleGamerAudio() {
+            const audio = document.getElementById('gamerAudio');
+            const icon = document.getElementById('gamerPlayIcon');
+            const btn = document.getElementById('gamerPlayBtn');
+            if (audio.paused) {
+                audio.play();
+                icon.className = 'fa-solid fa-pause text-white text-xl';
+                icon.style.marginLeft = '0';
+                btn.classList.add('animate-pulse');
+            } else {
+                audio.pause();
+                icon.className = 'fa-solid fa-play text-white text-xl ml-1';
+                btn.classList.remove('animate-pulse');
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const ga = document.getElementById('gamerAudio');
+            if (ga) ga.addEventListener('ended', () => {
+                document.getElementById('gamerPlayIcon').className = 'fa-solid fa-play text-white text-xl ml-1';
+                document.getElementById('gamerPlayBtn').classList.remove('animate-pulse');
+            });
+        });
 
         // Podcast toggle
         function togglePodcast() {
